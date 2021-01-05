@@ -9,6 +9,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'pg'
 #dotenv for enviromental variables
 gem 'dotenv-rails'
+# Bootstrap
+gem 'bootstrap'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
