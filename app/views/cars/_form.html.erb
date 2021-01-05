@@ -1,0 +1,312 @@
+<%= form_with(model: car, local: true) do |form| %>
+  <% if car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+        <% car.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :model_id %>
+    <%= form.number_field :model_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :car_type_id %>
+    <%= form.number_field :car_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_status_id %>
+    <%= form.number_field :vehicle_status_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :has_warranty %>
+    <%= form.check_box :has_warranty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :has_guarranty %>
+    <%= form.check_box :has_guarranty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :oldtimer %>
+    <%= form.check_box :oldtimer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_registration %>
+    <%= form.date_select :first_registration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manufacture_year %>
+    <%= form.number_field :manufacture_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :inspection_expiry %>
+    <%= form.date_select :inspection_expiry %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mileage %>
+    <%= form.number_field :mileage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_of_owner_id %>
+    <%= form.number_field :number_of_owner_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vin %>
+    <%= form.text_field :vin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cash_discount %>
+    <%= form.check_box :cash_discount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_price %>
+    <%= form.check_box :last_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveable %>
+    <%= form.check_box :driveable %>
+  </div>
+
+  <div class="field">
+    <%= form.label :damaged %>
+    <%= form.check_box :damaged %>
+  </div>
+
+  <div class="field">
+    <%= form.label :crashed %>
+    <%= form.check_box :crashed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_book %>
+    <%= form.check_box :service_book %>
+  </div>
+
+  <div class="field">
+    <%= form.label :slovenian %>
+    <%= form.check_box :slovenian %>
+  </div>
+
+  <div class="field">
+    <%= form.label :garaged %>
+    <%= form.check_box :garaged %>
+  </div>
+
+  <div class="field">
+    <%= form.label :never_crashed %>
+    <%= form.check_box :never_crashed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fuel_type_id %>
+    <%= form.number_field :fuel_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gearbox_id %>
+    <%= form.number_field :gearbox_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :power %>
+    <%= form.number_field :power %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ccm %>
+    <%= form.number_field :ccm %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doors %>
+    <%= form.number_field :doors %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seats %>
+    <%= form.number_field :seats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color_id %>
+    <%= form.number_field :color_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :metallic %>
+    <%= form.check_box :metallic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :consumption %>
+    <%= form.text_field :consumption %>
+  </div>
+
+  <div class="field">
+    <%= form.label :abs %>
+    <%= form.check_box :abs %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fourwheel %>
+    <%= form.check_box :fourwheel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :airbags %>
+    <%= form.number_field :airbags %>
+  </div>
+
+  <div class="field">
+    <%= form.label :xenon %>
+    <%= form.check_box :xenon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :led %>
+    <%= form.check_box :led %>
+  </div>
+
+  <div class="field">
+    <%= form.label :automatic_lights %>
+    <%= form.check_box :automatic_lights %>
+  </div>
+
+  <div class="field">
+    <%= form.label :alarm %>
+    <%= form.check_box :alarm %>
+  </div>
+
+  <div class="field">
+    <%= form.label :headup %>
+    <%= form.check_box :headup %>
+  </div>
+
+  <div class="field">
+    <%= form.label :emergency_brake %>
+    <%= form.check_box :emergency_brake %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ac %>
+    <%= form.check_box :ac %>
+  </div>
+
+  <div class="field">
+    <%= form.label :digital_ac %>
+    <%= form.check_box :digital_ac %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keyless_go %>
+    <%= form.check_box :keyless_go %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_stop %>
+    <%= form.check_box :start_stop %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cruise_control %>
+    <%= form.check_box :cruise_control %>
+  </div>
+
+  <div class="field">
+    <%= form.label :electric_parking_brake %>
+    <%= form.check_box :electric_parking_brake %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cd_player %>
+    <%= form.check_box :cd_player %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mp3_player %>
+    <%= form.check_box :mp3_player %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usb %>
+    <%= form.check_box :usb %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dab %>
+    <%= form.check_box :dab %>
+  </div>
+
+  <div class="field">
+    <%= form.label :navigation %>
+    <%= form.check_box :navigation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rear_camera %>
+    <%= form.check_box :rear_camera %>
+  </div>
+
+  <div class="field">
+    <%= form.label :towing_hook %>
+    <%= form.check_box :towing_hook %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hill_assist %>
+    <%= form.check_box :hill_assist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pdc %>
+    <%= form.check_box :pdc %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :avaliable %>
+    <%= form.check_box :avaliable %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

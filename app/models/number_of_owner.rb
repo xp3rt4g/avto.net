@@ -1,0 +1,2 @@
+class NumberOfOwner < ApplicationRecord
+end

@@ -1,0 +1,143 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Model</th>
+      <th>Type</th>
+      <th>Car type</th>
+      <th>Vehicle status</th>
+      <th>Has warranty</th>
+      <th>Has guarranty</th>
+      <th>Oldtimer</th>
+      <th>First registration</th>
+      <th>Manufacture year</th>
+      <th>Inspection expiry</th>
+      <th>Mileage</th>
+      <th>Number of owner</th>
+      <th>Vin</th>
+      <th>Price</th>
+      <th>Cash discount</th>
+      <th>Last price</th>
+      <th>Driveable</th>
+      <th>Damaged</th>
+      <th>Crashed</th>
+      <th>Service book</th>
+      <th>Slovenian</th>
+      <th>Garaged</th>
+      <th>Never crashed</th>
+      <th>Fuel type</th>
+      <th>Gearbox</th>
+      <th>Power</th>
+      <th>Ccm</th>
+      <th>Doors</th>
+      <th>Seats</th>
+      <th>Color</th>
+      <th>Metallic</th>
+      <th>Consumption</th>
+      <th>Abs</th>
+      <th>Fourwheel</th>
+      <th>Airbags</th>
+      <th>Xenon</th>
+      <th>Led</th>
+      <th>Automatic lights</th>
+      <th>Alarm</th>
+      <th>Headup</th>
+      <th>Emergency brake</th>
+      <th>Ac</th>
+      <th>Digital ac</th>
+      <th>Keyless go</th>
+      <th>Start stop</th>
+      <th>Cruise control</th>
+      <th>Electric parking brake</th>
+      <th>Cd player</th>
+      <th>Mp3 player</th>
+      <th>Usb</th>
+      <th>Dab</th>
+      <th>Navigation</th>
+      <th>Rear camera</th>
+      <th>Towing hook</th>
+      <th>Hill assist</th>
+      <th>Pdc</th>
+      <th>Comment</th>
+      <th>Avaliable</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.user_id %></td>
+        <td><%= car.model_id %></td>
+        <td><%= car.type %></td>
+        <td><%= car.car_type_id %></td>
+        <td><%= car.vehicle_status_id %></td>
+        <td><%= car.has_warranty %></td>
+        <td><%= car.has_guarranty %></td>
+        <td><%= car.oldtimer %></td>
+        <td><%= car.first_registration %></td>
+        <td><%= car.manufacture_year %></td>
+        <td><%= car.inspection_expiry %></td>
+        <td><%= car.mileage %></td>
+        <td><%= car.number_of_owner_id %></td>
+        <td><%= car.vin %></td>
+        <td><%= car.price %></td>
+        <td><%= car.cash_discount %></td>
+        <td><%= car.last_price %></td>
+        <td><%= car.driveable %></td>
+        <td><%= car.damaged %></td>
+        <td><%= car.crashed %></td>
+        <td><%= car.service_book %></td>
+        <td><%= car.slovenian %></td>
+        <td><%= car.garaged %></td>
+        <td><%= car.never_crashed %></td>
+        <td><%= car.fuel_type_id %></td>
+        <td><%= car.gearbox_id %></td>
+        <td><%= car.power %></td>
+        <td><%= car.ccm %></td>
+        <td><%= car.doors %></td>
+        <td><%= car.seats %></td>
+        <td><%= car.color_id %></td>
+        <td><%= car.metallic %></td>
+        <td><%= car.consumption %></td>
+        <td><%= car.abs %></td>
+        <td><%= car.fourwheel %></td>
+        <td><%= car.airbags %></td>
+        <td><%= car.xenon %></td>
+        <td><%= car.led %></td>
+        <td><%= car.automatic_lights %></td>
+        <td><%= car.alarm %></td>
+        <td><%= car.headup %></td>
+        <td><%= car.emergency_brake %></td>
+        <td><%= car.ac %></td>
+        <td><%= car.digital_ac %></td>
+        <td><%= car.keyless_go %></td>
+        <td><%= car.start_stop %></td>
+        <td><%= car.cruise_control %></td>
+        <td><%= car.electric_parking_brake %></td>
+        <td><%= car.cd_player %></td>
+        <td><%= car.mp3_player %></td>
+        <td><%= car.usb %></td>
+        <td><%= car.dab %></td>
+        <td><%= car.navigation %></td>
+        <td><%= car.rear_camera %></td>
+        <td><%= car.towing_hook %></td>
+        <td><%= car.hill_assist %></td>
+        <td><%= car.pdc %></td>
+        <td><%= car.comment %></td>
+        <td><%= car.avaliable %></td>
+        <td><%= link_to 'Show', car %></td>
+        <td><%= link_to 'Edit', edit_car_path(car) %></td>
+        <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Car', new_car_path %>
