@@ -65,3 +65,46 @@
 
     
 </div>
+
+
+<div class="d-lg-none container-fluid offcanvas-collapse" id="hiddenHamburger">
+    <strong>
+   <%#  <?php if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']) && isset($_SESSION['user_type'])){ ?>
+
+        <div class="row">
+          <div class="col-12 mt-2">
+            <a href="homepage.php" class="h6 black"><span>Prijavljeni ste kot: <strong><?php echo $_SESSION['user_name'] ?></strong></span></a>          </div>
+          <div class="col-12 mt-2">
+            <a href="homepage.php" class="btn btn-lg btn-block orange-bg text-white font-weight-bold"><i class="fa fa-user"></i><span class="float-left pl-3">Domov</span></a>
+          </div>
+          <div class="col-6 mt-2 pr-1 h-25">
+            <a href="add_ad.php" class="btn btn-lg btn-block orange-bg text-white font-weight-bold"><i class="fa fa-plus-circle"></i><span class="float-left pl-3">Nov oglas</span></a>
+          </div>
+          <div class="col-6 mt-2 pl-1 h-25">
+            <a href="logout.php" class="btn btn-lg btn-block orange-bg text-white font-weight-bold"><i class="fa fa-sign-out"></i><span class="float-left pl-3">Odjava</span></a>
+          </div>
+          <?php if($_SESSION['user_type'] == 'Admin'){ ?>
+          <div class="col-12 mt-2">
+            <a href="admin.php" class="btn btn-lg btn-block orange-bg text-white font-weight-bold"><i class="fa fa-user"></i><span class="float-left pl-3">Admin</span></a>
+          </div>
+      <?php } ?>
+        </div>
+
+     <?php }
+      else{ ?>
+
+      %> 
+      <div class="row">
+          <div class="col-12 mt-2">
+              <a href="homepage.php" class="btn btn-lg btn-block orange-bg text-white font-weight-bold"><i class="fa fa-user"></i><span class="float-left pl-3">Prijava v moj.avto.met</span></a>
+          </div>
+      </div>
+    </strong>
+</div>
+</body>
+</html>
+<script>
+  function changeClass(){
+    document.getElementById("hiddenHamburger").classList.toggle('open');
+  }
+</script>
