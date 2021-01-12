@@ -69,6 +69,6 @@ class NumberOfOwnersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def number_of_owner_params
-      params.fetch(:number_of_owner, {})
+      params.require(:number_of_owner).permit(:name) 
     end
 end

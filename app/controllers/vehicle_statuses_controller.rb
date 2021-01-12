@@ -69,6 +69,6 @@ class VehicleStatusesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vehicle_status_params
-      params.fetch(:vehicle_status, {})
+      params.require(:vehicle_status).permit(:name) 
     end
 end

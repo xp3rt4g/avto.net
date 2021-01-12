@@ -20,8 +20,9 @@
               <div class="row">
                   
                   <div class="col-4 pl-0">
-                    <a target="_self" href="index">
+                    <%= link_to(root_path) do %>
                     <%= image_tag("logo.png", alt:"www.avto.met", class:"logo", name:"Avto.net") %>
+                    <% end %>
                    </div>
 
                     <div class="col-8 d-lg-none d-block moj-menu p-0 m-0 text-right">
@@ -37,12 +38,12 @@
 
                       
                       <li>
-                         <a href="login">
+                         <%= link_to(new_user_session_path) do %>
                           <span class="moj-menu-dark mx-1 px-2">
                           <i class="fa fa-user mx-1"></i>
                           moj.avto.met
                           </span>
-                          </a>
+                          <% end %>
                           <% if user_signed_in? %>
                             <%= link_to "Log out", destroy_user_session_path, method: :delete %>
                           <% end %>
@@ -52,7 +53,7 @@
                 </div>
 		</div>
 	</div>
-    <div class="d-none d-lg-block ddcolortabsFULLWIDTH">
+    <div class="d-none d-lg-block ddcolortabsFULLWIDTH" >
         <div id="droplinemenu" class="ddcolortabs">
             <ul class="p-0 m-0">
             <li><a href="index" rel="submenuHOME" class="first"><span class="first"><i class="fa fa-home fa-lg"></i></span></a></li>

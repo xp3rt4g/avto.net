@@ -69,6 +69,6 @@ class FuelTypesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def fuel_type_params
-      params.fetch(:fuel_type, {})
+      params.require(:fuel_type).permit(:name) 
     end
 end

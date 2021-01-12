@@ -69,6 +69,6 @@ class GearboxesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def gearbox_params
-      params.fetch(:gearbox, {})
+      params.require(:gearbox).permit(:name) 
     end
 end
