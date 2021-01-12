@@ -7,6 +7,8 @@ ruby '2.7.0'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 #using postgres
 gem 'pg'
+#devise 
+gem 'devise'
 #dotenv for enviromental variables
 gem 'dotenv-rails'
 # Bootstrap

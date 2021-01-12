@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gearboxes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gearboxes.each do |gearbox| %>
+      <tr>
+        <td><%= link_to 'Show', gearbox %></td>
+        <td><%= link_to 'Edit', edit_gearbox_path(gearbox) %></td>
+        <td><%= link_to 'Destroy', gearbox, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gearbox', new_gearbox_path %>

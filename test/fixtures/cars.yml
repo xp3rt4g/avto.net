@@ -9,9 +9,9 @@ one:
   has_warranty: false
   has_guarranty: false
   oldtimer: false
-  first_registration: 2021-01-05
+  first_registration: 2021-01-12
   manufacture_year: 1
-  inspection_expiry: 2021-01-05
+  inspection_expiry: 2021-01-12
   mileage: 1
   number_of_owner_id: 1
   vin: MyString
@@ -70,9 +70,9 @@ two:
   has_warranty: false
   has_guarranty: false
   oldtimer: false
-  first_registration: 2021-01-05
+  first_registration: 2021-01-12
   manufacture_year: 1
-  inspection_expiry: 2021-01-05
+  inspection_expiry: 2021-01-12
   mileage: 1
   number_of_owner_id: 1
   vin: MyString
