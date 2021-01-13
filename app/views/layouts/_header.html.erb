@@ -37,17 +37,27 @@
                     <ul>
 
                       
-                      <li>
+                      
+                          <% if user_signed_in? %>
+                           <div class="loggedin">
+                            <li class="uporabnik rounded-bottom">
+                              <a href="homepage.php"><span>Prijavljeni ste kot: <strong><%= current_user.email %></strong></span></a>
+                              <%= link_to destroy_user_session_path, method: :delete  do %>
+                              <span>Kliknite <strong>TUKAJ</strong> za odjavo</span>
+                              <% end %>
+                            </li>
+                            </div>
+                            
+                          <% else %>
+                            <li>
                          <%= link_to(new_user_session_path) do %>
                           <span class="moj-menu-dark mx-1 px-2">
                           <i class="fa fa-user mx-1"></i>
                           moj.avto.met
                           </span>
                           <% end %>
-                          <% if user_signed_in? %>
-                            <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                          </li>
                           <% end %>
-                      </li>
                     </ul>                
                     </div>
                 </div>
