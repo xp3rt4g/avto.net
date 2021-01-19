@@ -1,6 +1,3 @@
-<%= javascript_include_tag 'widget' %>
-<%= javascript_include_tag 'jquery.fileupload' %>
-
 <%= form_with(model: car, local: true, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |form| %>
   <% if car.errors.any? %>
     <div id="error_explanation">

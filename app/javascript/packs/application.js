@@ -11,14 +11,14 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("packs/jquery.fileupload")
+require("packs/jquery.ui.widget")
+require("packs/widget")
 
 import $ from 'jquery';
 
 global.$ = $
 global.jQuery = $
-
-
-require('jquery-ui');
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
