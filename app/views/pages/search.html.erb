@@ -738,7 +738,10 @@
 
                     <div class="row m-0 my-3 p-0">
                         <div class="col-12 p-0">
-                            <%= f.submit(class: "btn btn-lg btn-block orange-bg text-center py-0", value: "Iskanje vozil") %>
+                            <%= button_tag( :class => "btn btn-lg btn-block orange-bg text-center py-0") do %>
+                                <i class="fa fa-search px-2 py-2"></i>
+                                <span class="px-3 py-2 float-left">Iskanje vozil</span>
+                            <% end %>
                             </button>
                         </div>
                     </div>

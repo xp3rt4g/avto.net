@@ -72,8 +72,11 @@
             
 
             <div class="card-footer bg-white border-top-0 text-center">
-                <%= f.submit "Log in", class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3", value: "Prijava" %>
-                
+                <%= button_tag( :class => "btn btn-lg btn-block orange-bg text-center py-0 mb-3") do %>
+                  <i class="fa fa-user px-2 py-2"></i>
+                  <span class="px-3 py-2 float-left">Prijava</span>
+                <% end %>
+
                 <div class="row">
                 
                 
