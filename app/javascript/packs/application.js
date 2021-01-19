@@ -4,6 +4,8 @@
 // that code so it'll be compiled.
 //= require jquery.ui.widget
 //= require z.jquery.fileupload
+//= require jquery-fileupload/basic
+
 
 require("@rails/ujs").start()
 require("turbolinks").start()

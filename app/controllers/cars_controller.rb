@@ -16,7 +16,7 @@ class CarsController < ApplicationController
 
   # GET /cars/new
   def new
-    @car = Car.new
+    @car = current_user.cars.build
     @manufacturers = Manufacturer.all
     @models = []
     if params[:manufacturer].present?
@@ -38,7 +38,7 @@ class CarsController < ApplicationController
   # POST /cars
   # POST /cars.json
   def create
-    @car = Car.new(car_params)
+    @car = current_user.cars.build(car_params)
 
     respond_to do |format|
       if @car.save
@@ -84,7 +84,7 @@ class CarsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def car_params
-      params.require(:car).permit(:user_id, :model_id, :type, :car_type_id, :vehicle_status_id, :has_warranty, :has_guarranty, :oldtimer, :first_registration, :manufacture_year, :inspection_expiry, :mileage, :number_of_owner_id, :vin, :price, :cash_discount, :last_price, :driveable, :damaged, :crashed, :service_book, :slovenian, :garaged, :never_crashed, :fuel_type_id, :gearbox_id, :power, :ccm, :doors, :seats, :color_id, :metallic, :consumption, :abs, :fourwheel, :airbags, :xenon, :led, :automatic_lights, :alarm, :headup, :emergency_brake, :ac, :digital_ac, :keyless_go, :start_stop, :cruise_control, :electric_parking_brake, :cd_player, :mp3_player, :usb, :dab, :navigation, :rear_camera, :towing_hook, :hill_assist, :pdc, :comment, :avaliable)
+      params.require(:car).permit(:user_id, :model_id, :name, :car_type_id, :vehicle_status_id, :has_warranty, :has_guarranty, :oldtimer, :first_registration, :manufacture_year, :inspection_expiry, :mileage, :number_of_owner_id, :vin, :price, :cash_discount, :last_price, :driveable, :damaged, :crashed, :service_book, :slovenian, :garaged, :never_crashed, :fuel_type_id, :gearbox_id, :power, :ccm, :doors, :seats, :color_id, :metallic, :consumption, :abs, :fourwheel, :airbags, :xenon, :led, :automatic_lights, :alarm, :headup, :emergency_brake, :ac, :digital_ac, :keyless_go, :start_stop, :cruise_control, :electric_parking_brake, :cd_player, :mp3_player, :usb, :dab, :navigation, :rear_camera, :towing_hook, :hill_assist, :pdc, :comment, :avaliable, :image_url)
     end
 
     def set_s3_direct_post
