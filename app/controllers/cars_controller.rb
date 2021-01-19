@@ -1,5 +1,6 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [ :show ]
 
   # GET /cars
   # GET /cars.json

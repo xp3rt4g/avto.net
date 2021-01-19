@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :pages
   resources :cars
   resources :account_types
+  resources :vehicle_statuses
   resources :towns
   resources :car_types
   resources :fuel_types

@@ -11,302 +11,535 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
+  
 
-  <div class="field">
-    <%= form.label :model_id %>
-    <%= form.number_field :model_id %>
-  </div>
+    
 
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
-  </div>
+    
+    <div class="card shadow-box">
+    
+    <form action="addCarProcess.php" method="post" enctype="multipart/form-data">
+    
+        <div class="card-body">
+        
+            <h4>Osnovni podatki</h4>
+            <hr>
+            <div class="form-group row">
+                <label for="manufacturer" class="text-muted col-sm-2 col-form-label">Znamka:</label>
+                <%= form.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Izberi znamko"}, {class: "form-control col-sm-10"}) %>
+            </div>
 
-  <div class="field">
-    <%= form.label :car_type_id %>
-    <%= form.number_field :car_type_id %>
-  </div>
+            <div class="form-group row">
+                <label for="model" class="text-muted col-sm-2 col-form-label">Model:</label>
+                <select name="model" id="model" class="form-control col-sm-10">
+                <option>Izberi model</option>
+                </select>
+            </div>
 
-  <div class="field">
-    <%= form.label :vehicle_status_id %>
-    <%= form.number_field :vehicle_status_id %>
-  </div>
+            <div class="form-group row">
+                <label for="type" class="text-muted col-sm-2 col-form-label">Dodatno ime:</label>
+                <%= form.text_field :type, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :has_warranty %>
-    <%= form.check_box :has_warranty %>
-  </div>
+            <div class="form-group row">
+                <label for="car_type" class="text-muted col-sm-2 col-form-label">Tip avta:</label>
+                <%= form.collection_select(:car_type_id, CarType.all, :id, :name, {prompt: "Izberi tip"}, {class: "form-control col-sm-10"}) %>
+                
+            </div>
 
-  <div class="field">
-    <%= form.label :has_guarranty %>
-    <%= form.check_box :has_guarranty %>
-  </div>
+            <div class="form-group row">
+                <label for="vehicle_status" class="text-muted col-sm-2 col-form-label">Stanje avta:</label>
+                <%= form.collection_select(:vehicle_status_id, VehicleStatus.all, :id, :name, {prompt: "Izberi stanje"}, {class: "form-control col-sm-10"}) %>
+            </div>
 
-  <div class="field">
-    <%= form.label :oldtimer %>
-    <%= form.check_box :oldtimer %>
-  </div>
+            <div class="form-group row">
+                <label for="manufacture_year" class="text-muted col-sm-2 col-form-label">Letnik izdelave:</label>
+                <%= form.number_field :manufacture_year, class: "form-control col-sm-10", min: "1900", max: "2999" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :first_registration %>
-    <%= form.date_select :first_registration %>
-  </div>
+            <div class="form-group row">
+                <label for="first_registration" class="text-muted col-sm-2 col-form-label">Prva registracija:</label>
+                <%= form.date_field :first_registration, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :manufacture_year %>
-    <%= form.number_field :manufacture_year %>
-  </div>
+            <div class="form-group row">
+                <label for="inspection_expiry" class="text-muted col-sm-2 col-form-label">Tehnični do:</label>
+                <%= form.date_field :inspection_expiry, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :inspection_expiry %>
-    <%= form.date_select :inspection_expiry %>
-  </div>
+            <div class="form-group row">
+                <label for="color" class="text-muted col-sm-2 col-form-label">Barva avta:</label>
+                <%= form.collection_select(:color_id, Color.all, :id, :name, {prompt: "Izberi barvo"}, {class: "form-control col-sm-10"}) %>
+            </div>
 
-  <div class="field">
-    <%= form.label :mileage %>
-    <%= form.number_field :mileage %>
-  </div>
+            <div class="form-group row">
+            <div class="col-sm-2"></div>
+                <div class="form-check pretty p-icon p-rotate">
+                    <%= form.check_box :metallic, class: "form-check-input" %>
+                    <div class="state p-danger-o">
+                        <i class="icon fa fa-check"></i>
+                        <label class="form-check-label" for="metallic">
+                            Metallic
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-  <div class="field">
-    <%= form.label :number_of_owner_id %>
-    <%= form.number_field :number_of_owner_id %>
-  </div>
+            <div class="form-group row">
+                <label for="ownership" class="text-muted col-sm-2 col-form-label">Podatki o lastništvu:</label>
+                <%= form.collection_select(:number_of_owner_id, NumberOfOwner.all, :id, :name, {prompt: "Izberi lastništvo"}, {class: "form-control col-sm-10"}) %>
+            </div>
 
-  <div class="field">
-    <%= form.label :vin %>
-    <%= form.text_field :vin %>
-  </div>
+            <div class="form-group row">
+                <label for="mileage" class="text-muted col-sm-2 col-form-label">Prevoženi kilometri:</label>
+                <%= form.number_field :mileage, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
+            <div class="form-group row">
+                <label for="doors" class="text-muted col-sm-2 col-form-label">Število vrat:</label>
+                <%= form.number_field :doors, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :cash_discount %>
-    <%= form.check_box :cash_discount %>
-  </div>
+            <div class="form-group row">
+                <label for="seats" class="text-muted col-sm-2 col-form-label">Število sedežev:</label>
+                <%= form.number_field :seats, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :last_price %>
-    <%= form.check_box :last_price %>
-  </div>
+            <div class="form-group row">
+                <label for="airbags" class="text-muted col-sm-2 col-form-label">Število airbagov:</label>
+                <%= form.number_field :airbags, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :driveable %>
-    <%= form.check_box :driveable %>
-  </div>
+            <div class="form-group row">
+                <label for="comment" class="text-muted col-sm-2 col-form-label">Komentar:</label>
+                <%= form.text_area :comment, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :damaged %>
-    <%= form.check_box :damaged %>
-  </div>
+            <h4 class="mt-4">Podatki o motorju</h4>
+            <hr>
 
-  <div class="field">
-    <%= form.label :crashed %>
-    <%= form.check_box :crashed %>
-  </div>
+            <div class="form-group row">
+                <label for="fuel" class="text-muted col-sm-2 col-form-label">Gorivo:</label>
+                <%= form.collection_select(:fuel_type_id, FuelType.all, :id, :name, {prompt: "Izberi gorivo"}, {class: "form-control col-sm-10"}) %>
+            </div>
 
-  <div class="field">
-    <%= form.label :service_book %>
-    <%= form.check_box :service_book %>
-  </div>
+            <div class="form-group row">
+                <label for="gearbox" class="text-muted col-sm-2 col-form-label">Menjalnik:</label>
+                <%= form.collection_select(:gearbox_id, Gearbox.all, :id, :name, {prompt: "Izberi menjalnik"}, {class: "form-control col-sm-10"}) %>
+            </div>
 
-  <div class="field">
-    <%= form.label :slovenian %>
-    <%= form.check_box :slovenian %>
-  </div>
+            <div class="form-group row">
+                <label for="power" class="text-muted col-sm-2 col-form-label">Moč (v kW):</label>
+                <%= form.number_field :power, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :garaged %>
-    <%= form.check_box :garaged %>
-  </div>
+            <div class="form-group row">
+                <label for="ccm" class="text-muted col-sm-2 col-form-label">Prostornina motorja ccm:</label>
+                <%= form.number_field :ccm, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :never_crashed %>
-    <%= form.check_box :never_crashed %>
-  </div>
+            <div class="form-group row">
+                <label for="consumption" class="text-muted col-sm-2 col-form-label">Poraba (l/100km):</label>
+                <%= form.text_field :consumption, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :fuel_type_id %>
-    <%= form.number_field :fuel_type_id %>
-  </div>
+            <h4 class="mt-4">Dodatna oprema:</h4>
+            <hr>
 
-  <div class="field">
-    <%= form.label :gearbox_id %>
-    <%= form.number_field :gearbox_id %>
-  </div>
 
-  <div class="field">
-    <%= form.label :power %>
-    <%= form.number_field :power %>
-  </div>
 
-  <div class="field">
-    <%= form.label :ccm %>
-    <%= form.number_field :ccm %>
-  </div>
+            <div class="col-12 pl-0 pb-4"><strong>Klimatizacija</strong></div>
 
-  <div class="field">
-    <%= form.label :doors %>
-    <%= form.number_field :doors %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :ac, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="ac">
+                                            klima
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :seats %>
-    <%= form.number_field :seats %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :digital_ac, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="ac">
+                                            digitalna klima
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :color_id %>
-    <%= form.number_field :color_id %>
-  </div>
+                        <div class="col-12 pl-0 py-4"><strong>Notranja oprema</strong></div>
 
-  <div class="field">
-    <%= form.label :metallic %>
-    <%= form.check_box :metallic %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :keyless, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="keyless">
+                                            keyless go
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :consumption %>
-    <%= form.text_field :consumption %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :headup, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="headup">
+                                            HeadUp display
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :abs %>
-    <%= form.check_box :abs %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :navigation, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="navigation">
+                                            navigacija
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :fourwheel %>
-    <%= form.check_box :fourwheel %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :cd_player, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="cd_player">
+                                            CD predvajalnik
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :airbags %>
-    <%= form.number_field :airbags %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :mp3_player, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="mp3_player">
+                                            MP3 predvajalnik
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :xenon %>
-    <%= form.check_box :xenon %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :dab, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="dab">
+                                            DAB radio
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :led %>
-    <%= form.check_box :led %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :electric_parking_brake, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="electric_parking_brake">
+                                            električna ročna zavora
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :automatic_lights %>
-    <%= form.check_box :automatic_lights %>
-  </div>
+                        <div class="col-12 pl-0 py-3"><strong>Varnost</strong></div>
 
-  <div class="field">
-    <%= form.label :alarm %>
-    <%= form.check_box :alarm %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :abs, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="abs">
+                                            ABS sistem
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :headup %>
-    <%= form.check_box :headup %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :fourwheel, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="fourwheel">
+                                            štirikolesni pogon
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :emergency_brake %>
-    <%= form.check_box :emergency_brake %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :alarm, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="alarm">
+                                            alarm
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :ac %>
-    <%= form.check_box :ac %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :xenon, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="xenon">
+                                            xenon žarometi
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :digital_ac %>
-    <%= form.check_box :digital_ac %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :led, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="led">
+                                            LED žarometi
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :keyless_go %>
-    <%= form.check_box :keyless_go %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :automatic_lights, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="automatic_lights">
+                                            avtomatske luči
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :start_stop %>
-    <%= form.check_box :start_stop %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :emergency_brake, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="emergency_brake">
+                                            zaviranje v sili
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :cruise_control %>
-    <%= form.check_box :cruise_control %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :cruise_control, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="cruise_control">
+                                            tempomat
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :electric_parking_brake %>
-    <%= form.check_box :electric_parking_brake %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :hill_assist, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="hill_assist">
+                                            pomoč za speljevanje v klanec
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :cd_player %>
-    <%= form.check_box :cd_player %>
-  </div>
+                        <div class="col-12 pl-0 py-4"><strong>Pomoč pri parkiranju</strong></div>
 
-  <div class="field">
-    <%= form.label :mp3_player %>
-    <%= form.check_box :mp3_player %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :pdc, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="pdc">
+                                            parkirni senzorji
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :usb %>
-    <%= form.check_box :usb %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :rear_camera, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="rear_camera">
+                                            parkirna kamera
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :dab %>
-    <%= form.check_box :dab %>
-  </div>
+                        <div class="col-12 pl-0 py-4"><strong>Lastništvo</strong></div>
 
-  <div class="field">
-    <%= form.label :navigation %>
-    <%= form.check_box :navigation %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :service_book, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="service_book">
+                                            servisna knjiga
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :rear_camera %>
-    <%= form.check_box :rear_camera %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :slovenian, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="slovenian">
+                                            slovensko poreklo
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :towing_hook %>
-    <%= form.check_box :towing_hook %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :oldtimer, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="oldtimer">
+                                            oldtimer
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= form.label :hill_assist %>
-    <%= form.check_box :hill_assist %>
-  </div>
 
-  <div class="field">
-    <%= form.label :pdc %>
-    <%= form.check_box :pdc %>
-  </div>
+                        <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :garaged, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="garaged">
+                                            garažiran
+                                        </label>
+                                    </div>
+                            </div>
+                        </div>
+            
+            <h4 class="mt-4">Cena:</h4>
+            <hr>
 
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
-  </div>
+            <div class="form-group row">
+                <label for="price" class="text-muted col-sm-2 col-form-label">Cena:</label>
+                <%= form.number_field :price, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :avaliable %>
-    <%= form.check_box :avaliable %>
-  </div>
+            <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :cash_discount, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="cash_discount">
+                                            gotovinski popust
+                                        </label>
+                                    </div>
+                            </div>
+            </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+            <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :last_price, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="last_price">
+                                            zadnja cena
+                                        </label>
+                                    </div>
+                            </div>
+            </div>
+
+            <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :has_warranty, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="warranty">
+                                            garancija
+                                        </label>
+                                    </div>
+                            </div>
+            </div>
+
+
+            <div class="col-6 col-sm-4 p-0">
+                            <div class="form-check pretty p-icon p-rotate m-2">
+                                    <%= form.check_box :has_guarranty, class: "form-check-input" %>
+                                    <div class="state p-danger-o">
+                                        <i class="icon fa fa-check"></i>
+                                        <label class="form-check-label" for="guarranty">
+                                            jamstvo
+                                        </label>
+                                    </div>
+                            </div>
+            </div>
+
+            <h4 class="mt-4">Slika:</h4>
+            <hr>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Naloži</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="image" name="image"
+                  aria-describedby="inputGroupFileAddon01" required>
+                <label class="custom-file-label" for="image">Izberi sliko</label>
+              </div>
+            </div>
+            
+            <script>
+                $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+            </script>
+
+
+            <hr class="mb-4 mt-4">
+
+            <%= button_tag( :class => "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-align-center") do %>
+              <span class="px-3 py-2">BREZPLAČNA objava oglasa</span>
+            <% end %>
+                    
+
+        </div>
+    
+    </form>
+    
+    </div>
+
+
+</div>
+
 <% end %>
