@@ -1,26 +1,139 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container p-0">
+    <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+            <div class="row pt-3 pb-2 px-3">
+                <div class="col-12 px-0">
+                    <h3><strong>Dobrodošli na moj.avto.met</strong></h3>
+                </div>
+            </div>
     </div>
-  <% end %>
+        <div class="card-deck">
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-<%= render "devise/shared/links" %>
+        <div class="card rounded shadow-box">
+
+            <div class="card-header h4 font-size-l">Prijava v avto.met</div>
+            <div class="card-body">
+                <label for="email" class="font-weight-bold">E-mail:</label>
+                <div class="input-group mb-2 mr-sm-2 mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user fa-2x"></i>
+                        </div>
+                    </div>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Vpišite E-mail!" %>
+
+                </div>
+
+                <label for="password" class="w-100 font-weight-bold">
+                    <div class="row">
+                        <div class="col-6">Geslo:</div>
+                        <div class="col-6 text-right">
+                            <div class="pretty p-switch p-slim">
+                                <input type="checkbox" name="showpass" id="showpass" onclick="showPass()">
+                                <div class="state">
+                                    <label> Prikaži geslo</label>
+                                </div>
+                            </div>
+
+                            <!-- 
+
+                            <div class="pretty p-icon p-toggle p-plain">
+                                <input type="checkbox" name="showpass" id="showpass" onclick="showPass()">
+                                <div class="state p-success-o p-on">
+                                    <i class="icon fa fa-eye"></i>
+                                    <label>Skrij geslo</label>
+                                </div>
+                                <div class="state p-off">
+                                    <i class="icon fa fa-eye-slash"></i>
+                                    <label>Pokaži geslo</label>
+                                </div>
+                            </div>
+
+                            -->
+                        </div>
+                    </div>
+                </label>
+                <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-lock fa-2x"></i>
+                        </div>
+                    </div>
+                    <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg", placeholder: "Vpišite geslo!", id: "password" %>
+                </div>
+                  <% if devise_mapping.rememberable? %>
+                    <div class="field">
+                      <%= f.check_box :remember_me %>
+                      <%= f.label :remember_me %>
+                    </div>
+                  <% end %>
+            </div>
+            
+
+            <div class="card-footer bg-white border-top-0 text-center">
+                <%= f.submit "Log in", class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3", value: "Prijava" %>
+                
+                <div class="row">
+                
+                
+
+               <div class="g-signin2 col-5" data-onsuccess="onSignIn"></div>
+
+                
+                <div class="fb-login-button col-5" scope="public_profile,email"
+                    onlogin="checkLoginState();" data-size="medium" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>                
+
+                </div> 
+                
+                <a href="forgotPassEmail.php">
+                    <span class="black">
+                        Pozabljeno geslo?
+                    </span>
+                </a>
+            
+            </div>
+
+        </div>
+
+    <% end %>
+
+    <div class="card rounded shadow-box">
+
+        <div class="card-header h4">Registracija na avto.met</div>
+        <div class="card-body font-weight-normal">
+            Kaj pridobite z registracijo:
+            <ul>
+                <li>objavljanje oglasov kot POSAMEZNIK</li>
+                <li>objavljanje večih oglasov kot TRGOVEC</li>
+                <li>shranjevanje priljubljenih kriterijev iskanja</li>
+                <li>shranjevanje priljubljenih avtomobilov</li>
+            </ul>
+            Število objav je lahko omejeno odvisno od tipa registracije in naročniškega razmerja!
+        </div>
+        <div class="card-footer bg-white border-top-0 text-center">
+        
+            <a href="registerSelect.php" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3">
+                <i class="fa fa-pencil text-white px-2 py-2"></i>
+                <span class="text-white font-weight-bold px-3 py-2 float-left">Registriraj se!</span>
+            </a>
+            <a href="#"><span class="invisible">.</span></a>
+        
+        </div>
+    </div>
+
+
+    </div>
+</div>
+
+<script>
+
+function showPass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
