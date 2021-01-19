@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root :to => 'cars#index'
+  root :to => 'pages#index'
   devise_for :users
   resources :colors
+  resources :pages
   resources :cars
   resources :account_types
   resources :towns
@@ -12,5 +13,7 @@ Rails.application.routes.draw do
   resources :number_of_owners
   resources :manufacturers
   resources :models
+
+  get '/search' => 'pages#search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
