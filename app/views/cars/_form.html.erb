@@ -26,15 +26,39 @@
             <hr>
             <div class="form-group row">
                 <label for="manufacturer" class="text-muted col-sm-2 col-form-label">Znamka:</label>
-                <%= form.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Izberi znamko"}, {class: "form-control col-sm-10"}) %>
+                <%= form.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Izberi znamko"}, {class: "form-control col-sm-10 manufacturer_select"}) %>
             </div>
 
             <div class="form-group row">
                 <label for="model" class="text-muted col-sm-2 col-form-label">Model:</label>
-                <select name="model" id="model" class="form-control col-sm-10">
-                <option>Izberi model</option>
-                </select>
+                <%= form.collection_select(:model_id, Model.all, :id, :name, {prompt: "Izberi model"}, {class: "form-control col-sm-10 model_select"}) %>
             </div>
+
+            <script>
+            
+            $(document).on("change", ".manufacturer_select", function(){
+              var manufacturer = $(this).val();
+              $.ajax({
+                url: "/cars/new",
+                method: "GET",  
+                dataType: "json",
+                data: {manufacturer: manufacturer},
+                error: function (xhr, status, error) {
+                  console.error('AJAX Error: ' + status + error);
+                },
+                success: function (response) {
+                  $(".model_select").empty();
+                  console.log(response);
+                  var models = response["models"];
+                  $(".model_select").append('<option>Izberi model</option>');
+                  for(var i=0; i< models.length; i++){
+                    $(".model_select").append('<option value="' + models[i]["id"] + '">' + models[i]["name"] + '</option>');
+                  }
+                }
+              });
+            });
+            
+            </script>
 
             <div class="form-group row">
                 <label for="type" class="text-muted col-sm-2 col-form-label">Dodatno ime:</label>

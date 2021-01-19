@@ -9,6 +9,10 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'pg'
 #devise 
 gem 'devise'
+#AWS
+gem 'aws-sdk', '~> 2'
+#jquery file upload
+gem "jquery-fileupload-rails"
 #dotenv for enviromental variables
 gem 'dotenv-rails'
 # Bootstrap
