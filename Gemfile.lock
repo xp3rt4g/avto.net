@@ -111,10 +111,6 @@ GEM
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
-    jquery-fileupload-rails (1.0.0)
-      actionpack (>= 3.1)
-      railties (>= 3.1)
-      sassc
     loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -246,7 +242,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   jbuilder (~> 2.7)
-  jquery-fileupload-rails
   pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)

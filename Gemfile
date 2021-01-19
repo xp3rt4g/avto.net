@@ -11,12 +11,8 @@ gem 'pg'
 gem 'devise'
 #AWS
 gem 'aws-sdk', '~> 2'
-#jquery file upload
-gem "jquery-fileupload-rails"
 #dotenv for enviromental variables
 gem 'dotenv-rails'
-#fileupload
-gem "jquery-fileupload-rails"
 # Bootstrap
 gem 'bootstrap'
 # Use Puma as the app server
