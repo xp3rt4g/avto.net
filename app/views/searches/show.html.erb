@@ -6,10 +6,13 @@
 <% else %>
 <% @search.search_cars.each do |car| %>
 
+<%= link_to car_path(car) do %>
 <%= car.model.manufacturer.name %>
 <%= car.model.name %>
 <%= car.price %>
-
+<%= car.manufacture_year %>
+<%= car.mileage %>
+<% end %>
 <% end %>
 
 <% end %>
