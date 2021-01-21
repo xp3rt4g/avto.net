@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'pages#index'
+  root :to => 'searches#new'
   devise_for :users
   resources :colors
   resources :pages
@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   resources :number_of_owners
   resources :manufacturers
   resources :models
+  resources :searches
+
 
   get 'cars/update_models' , :as => 'update_models' 
-  get '/search' => 'pages#search'
+  get '/search' => 'searches#advanced'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,15 @@
+<h1>Search Results</h1>
+<p><%= link_to "Back", new_search_path %></p>
+
+<% if @search.search_cars.empty? %>
+    <p>No Pokemon were found.</p>
+<% else %>
+<% @search.search_cars.each do |car| %>
+
+<%= car.model.manufacturer.name %>
+<%= car.model.name %>
+<%= car.price %>
+
+<% end %>
+
+<% end %>

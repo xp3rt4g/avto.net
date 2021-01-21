@@ -10,7 +10,7 @@
                     </h4>
                 </div>
             </div>
-            <%= form_with url: "/pages/results" do |f| %>
+            <%= form_with model: @search do |f| %>
                 <div class="form-row">
                     <div class="col-md-4">
                         <div class="col-12 px-0 py-2">
@@ -203,7 +203,7 @@
                 <div class="form-row pt-2 pb-3">
                 
                     <div class="col-12 col-md-8 d-md-block">
-                        <%= link_to(search_path, class: "btn btn-outline-light btn-block text-left border h-100") do %>
+                        <%= link_to("/search", class: "btn btn-outline-light btn-block text-left border h-100") do %>
                             <i class="fa fa-sliders fa-lg align-middle pr-2 orange"></i>
                             <span class="align-middle text-truncate black font-weight-normal">Napredno iskanje z filtri</span>
                         <% end %>

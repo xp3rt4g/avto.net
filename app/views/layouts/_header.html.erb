@@ -67,7 +67,7 @@
         <div id="droplinemenu" class="ddcolortabs">
             <ul class="p-0 m-0">
             <li><%= link_to(root_path, class: "first", rel: "submenuHOME") do %><span class="first"><i class="fa fa-home fa-lg"></i></span><% end %></li>
-            <li><%= link_to(search_path) do %><span>Išči avte</span><% end %></li>
+            <li><%= link_to("/search") do %><span>Išči avte</span><% end %></li>
             <% if user_signed_in? %>
               <li class="float-right"><%= link_to destroy_user_session_path, method: :delete do %><span>Odjava</span><% end %></li>
               <li class="float-right"><%= link_to new_car_path do %><span>Objavi oglas</span><% end %></li>

@@ -8,7 +8,7 @@
     <div class="container my-3 pb-2">
         <div class="row">
             <div class="col-12 pr-sm-3">
-                <%= form_with do |f| %>
+                <%= form_with model: @search do |f| %>
                     <input type="hidden" name="search_type" value="advanced">
                     <div class="row bg-white shadow-box px-3 pt-2 pb-2 mb-2">
                         <div class="col-12 border-bottom p-0 mb-3">
