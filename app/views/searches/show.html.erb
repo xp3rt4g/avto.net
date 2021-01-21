@@ -1,18 +1,115 @@
-<h1>Search Results</h1>
-<p><%= link_to "Back", new_search_path %></p>
+<div class="container p-0">
+        <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+            <div class="row pt-3 pb-2 px-3">
+                <div class="col-12 px-0">
+                    <h3 class="blue"><strong>Rezultati iskanja</strong></h3>
+                    <%= stylesheet_link_tag 'search' %>
+                </div>
+            </div>
+        </div>
+        
 
-<% if @search.search_cars.empty? %>
-    <p>No Pokemon were found.</p>
-<% else %>
-<% @search.search_cars.each do |car| %>
+        <div class="col-12">
 
-<%= link_to car_path(car) do %>
-<%= car.model.manufacturer.name %>
-<%= car.model.name %>
-<%= car.price %>
-<%= car.manufacture_year %>
-<%= car.mileage %>
-<% end %>
-<% end %>
+            <% if @search.search_cars.empty? %>
+                <div class="alert-danger"><p>No cars were found.</p></div>
+            <% else %>
+            <% @search.search_cars.each do |car| %>
+            
+                        
+            <div class="row bg-white mb-3 pb-3 pb-sm-0 position-relative results-row center shadow-dark text-center">
 
-<% end %>
+                <%= link_to car_path(car), class: "stretched-link" do %> <% end %>
+
+                <div
+                    class="bg-dark col-12 px-3 py-2 font-weight-bold text-truncate text-white text-decoration-none results-title">
+                    <%= car.model.manufacturer.name %> <%= car.model.name %> <%= car.name %></div>
+
+                <div class="col-auto px-3 py-0 py-sm-3 pt-3 photo d-flex justify-content-center align-items-center m-auto">
+
+                    <div class="photo-display align-self-center">
+
+                        <img src="https://povse.xyz/user_img/fiat-punto-8.jpg" alt="1.5 TDCi" class="img-fluid">
+
+                    </div>
+
+                </div>
+
+                <div class="col-auto py-0 results-top-data pb-lg-3 mt-md-0 mt-md-3 mr-sm-0 pr-0 m-auto">
+
+                    <div class="p-0 m-0 pl-3 pr-3">
+
+                        <div class="results-top-data-display">
+
+                            <table
+                                class="table table-striped table-sm table-borderless font-weight-normal  my-3 my-sm-0">
+
+                                <tbody>
+
+                                    <tr>
+
+                                        <td class="w-25 d-none d-md-block pl-3">1.registracija</td>
+                                        <td class="w-75 pl-3">
+                                            <%= car.first_registration.strftime('%m/%d/%Y') %></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td class="d-none d-md-block pl-3">Prevoženih</td>
+                                        <td class="pl-3"><%= car.mileage %> km</td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td class="d-none d-md-block pl-3">Gorivo</td>
+                                        <td class="pl-3"><%= car.fuel_type.name %></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td class="d-none d-md-block pl-3">Menjalnik</td>
+                                        <td class="pl-3"><%= car.gearbox.name %></td>
+
+                                    </tr>
+                                    <tr class="d-none d-md-table-row">
+
+                                        <td class="d-none d-md-block pl-3">Motor</td>
+                                        <td class="pl-3">
+                                            <%= car.ccm %>ccm, <%= car.power %>kW / <%= (car.power*1.34102209).round %> KM                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 mt-sm-0 pt-0 pt-sm-5 results-price-logo">
+
+
+                        <div class="results-price ml-4 ml-sm-0 ml-md-4">
+
+                            <div class="price-show">
+
+                                <div class="price-text">
+
+                                    <%= number_with_delimiter(car.price, :delimiter => '.') %> €
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        <% end %>
+        <% end %>
+        </div>
+    </div>

@@ -21,7 +21,7 @@
                         <div class="col-12 px-0">
                             <div class="input-group">
 
-                                <%= f.collection_select(:model_id, Model.all, :id, :name, {prompt: "Vsi modeli"}, {class: "custom-select model_select"}) %>
+                                <%= f.select(:model_id, [] , {prompt: "Vsi modeli"}, {class: "custom-select model_select"}) %>
 
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                     $(document).on("change", ".manufacturer_select", function(){
                     var manufacturer = $(this).val();
                     $.ajax({
-                        url: "/pages",
+                        url: "/searches/new",
                         method: "GET",  
                         dataType: "json",
                         data: {manufacturer: manufacturer},
@@ -44,7 +44,7 @@
                         $(".model_select").empty();
                         console.log(response);
                         var models = response["models"];
-                        $(".model_select").append('<option>Izberi model</option>');
+                        $(".model_select").append('<option value="0">Izberi model</option>');
                         for(var i=0; i< models.length; i++){
                             $(".model_select").append('<option value="' + models[i]["id"] + '">' + models[i]["name"] + '</option>');
                         }

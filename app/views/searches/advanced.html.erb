@@ -14,39 +14,30 @@
                         <div class="col-12 border-bottom p-0 mb-3">
                             <h5><strong>Starost</strong></h5>
                         </div>
-                        <div class="col-12 col-sm-4 p-0 font-weight-normal">
+                        <div class="col-12 col-sm-3 p-0 font-weight-normal">
                             <div class="form-check pretty p-icon p-rotate mb-4">
-                                <input name="novo" class="form-check-input" type="checkbox" checked="checked" value="1" id="novo">
+                                <%= f.radio_button :vehicle_status_id, 0, checked: "checked" %>
                                 <div class="state p-danger-o">
                                 <i class="icon fa fa-check"></i>
                                 <label class="form-check-label" for="novo">
-                                    novo
+                                    Katerakoli
                                 </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-4 p-0 font-weight-normal">
+                        <% @vehicle_status.each do |status| %>
+                        <div class="col-12 col-sm-3 p-0 font-weight-normal">
                             <div class="form-check pretty p-icon p-rotate mb-4">
-                                <input name="testno" class="form-check-input" type="checkbox" checked="checked" value="1" id="testno">
+                                <%= f.radio_button :vehicle_status_id, status.id %>
                                 <div class="state p-danger-o">
                                 <i class="icon fa fa-check"></i>
                                 <label class="form-check-label" for="novo">
-                                    testno
+                                    <%= status.name %>
                                 </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-4 p-0 font-weight-normal">
-                            <div class="form-check pretty p-icon p-rotate mb-4">
-                                <input name="rabljeno" class="form-check-input" type="checkbox" checked="checked" value="1" id="rabljeno">
-                                <div class="state p-danger-o">
-                                <i class="icon fa fa-check"></i>
-                                <label class="form-check-label" for="rabljenno">
-                                    rabljeno
-                                </label>
-                                </div>
-                            </div>
-                        </div>
+                        <% end %>
                     </div>
 
                     <div class="row bg-white shadow-box px-3 pt-2 pb-2 mb-2">
@@ -55,7 +46,7 @@
                         </div>
                         <div class="col-12 col-sm-4 p-0 font-weight-normal">
                             <div class="form-check pretty p-icon p-curve p-rotate mb-4">
-                                <input name="car_type" class="form-check-input" type="radio" value="all" id="car_type" checked="checked">
+                                <%= f.radio_button :car_type_id, 0, checked: "checked" %>
                                 <div class="state p-danger-o">
                                 <i class="icon fa fa-check"></i>
                                 <label class="form-check-label" for="car_type">
@@ -64,43 +55,21 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <% @car_type.each do |type| %>
                         <div class="col-12 col-sm-4 p-0 font-weight-normal">
                             <div class="form-check pretty p-icon p-curve p-rotate mb-4">
-                                <input name="car_type" class="form-check-input" type="radio" value="1" id="car_type">
+                                <%= f.radio_button :car_type_id, type.id %>
                                 <div class="state p-danger-o">
                                 <i class="icon fa fa-check"></i>
                                 <label class="form-check-label" for="car_type">
-                                    Limuzina                                </label>
+                                    <%= type.name %>                                </label>
                                 </div>
                             </div>
                         </div>
-
+                        <% end %>
                         
-                        <div class="col-12 col-sm-4 p-0 font-weight-normal">
-                            <div class="form-check pretty p-icon p-curve p-rotate mb-4">
-                                <input name="car_type" class="form-check-input" type="radio" value="2" id="car_type">
-                                <div class="state p-danger-o">
-                                <i class="icon fa fa-check"></i>
-                                <label class="form-check-label" for="car_type">
-                                    Karavan                                </label>
-                                </div>
-                            </div>
-                        </div>
 
-                        
-                        <div class="col-12 col-sm-4 p-0 font-weight-normal">
-                            <div class="form-check pretty p-icon p-curve p-rotate mb-4">
-                                <input name="car_type" class="form-check-input" type="radio" value="3" id="car_type">
-                                <div class="state p-danger-o">
-                                <i class="icon fa fa-check"></i>
-                                <label class="form-check-label" for="car_type">
-                                    Hatchback                                </label>
-                                </div>
-                            </div>
                         </div>
-
-                                            </div>
 
                     <div class="row bg-white shadow-box px-3 pt-2 pb-2 mb-2">
                         <div class="col-12 border-bottom p-0 mb-3">
@@ -109,16 +78,41 @@
 
                         <div class="col-12 col-sm-6 p-0 pr-3">
                             <label for="manufacturer" class="m-0"><strong>Znamka</strong></label>
-                            <%= f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Vse znamke"}, {class: "custom-select"}) %>
+                            <%= f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Vse znamke"}, {class: "custom-select manufacturer_select"}) %>
                         </div>
 
                         <div class="col-12 col-sm-6 p-0 pr-3">
                             <label for="model" class="m-0"><strong>Model</strong></label>
-                            <select name="model" id="model" class="custom-select">
-                                <option value="all">Vsi modeli</option>
-                            </select>
+                            <%= f.select(:model_id, [] , {prompt: "Vsi modeli"}, {class: "custom-select model_select"}) %>
                         </div>
                     </div>
+
+
+                    <script>
+            
+                    $(document).on("change", ".manufacturer_select", function(){
+                    var manufacturer = $(this).val();
+                    $.ajax({
+                        url: "/searches/new",
+                        method: "GET",  
+                        dataType: "json",
+                        data: {manufacturer: manufacturer},
+                        error: function (xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                        },
+                        success: function (response) {
+                        $(".model_select").empty();
+                        console.log(response);
+                        var models = response["models"];
+                        $(".model_select").append('<option value="0">Izberi model</option>');
+                        for(var i=0; i< models.length; i++){
+                            $(".model_select").append('<option value="' + models[i]["id"] + '">' + models[i]["name"] + '</option>');
+                        }
+                        }
+                    });
+                    });
+                    
+                    </script>
 
                     <div class="row bg-white shadow-box px-3 pt-2 pb-2 mb-2">
                         <div class="col-12 border-bottom p-0 mb-3">
@@ -134,7 +128,7 @@
 
                         <div class="col-12 col-sm-4 p-0 pt-1 font-weight-normal">
                             <div class="form-check pretty p-icon p-rotate ml-sm-4">
-                                <input name="avaliable" class="form-check-input" type="checkbox" checked="checked" value="1" id="avaliable">
+                                <%= f.check_box(:avaliable, class: "form-check-input") %>
                                 <div class="state p-danger-o">
                                     <i class="icon fa fa-check"></i>
                                     <label class="form-check-label" for="avaliable">
@@ -146,18 +140,13 @@
 
                         <label for="yearMin" class="col-12 p-0 mt-3 mb-0"><strong>Letnik 1. registracije</strong></label>
                         <div class="col-12 col-sm-8 p-0 pr-3 input-group">
-                            <select name="yearMin" id="yearMin" class="custom-select">
-                                    <option value="0">Letnik od</option>
-                                    <option value=2021>od 2021</option><option value=2020>od 2020</option><option value=2019>od 2019</option><option value=2018>od 2018</option><option value=2017>od 2017</option><option value=2016>od 2016</option><option value=2015>od 2015</option><option value=2014>od 2014</option><option value=2013>od 2013</option><option value=2012>od 2012</option><option value=2011>od 2011</option><option value=2010>od 2010</option><option value=2009>od 2009</option><option value=2008>od 2008</option><option value=2007>od 2007</option><option value=2006>od 2006</option><option value=2005>od 2005</option><option value=2004>od 2004</option><option value=2003>od 2003</option><option value=2002>od 2002</option><option value=2001>od 2001</option><option value=2000>od 2000</option><option value=1999>od 1999</option><option value=1998>od 1998</option><option value=1997>od 1997</option><option value=1996>od 1996</option><option value=1995>od 1995</option><option value=1994>od 1994</option><option value=1993>od 1993</option><option value=1992>od 1992</option><option value=1991>od 1991</option><option value=1990>od 1990</option><option value=1989>od 1989</option><option value=1988>od 1988</option><option value=1987>od 1987</option><option value=1986>od 1986</option><option value=1985>od 1985</option><option value=1984>od 1984</option><option value=1983>od 1983</option><option value=1982>od 1982</option><option value=1981>od 1981</option><option value=1980>od 1980</option><option value=1979>od 1979</option><option value=1978>od 1978</option><option value=1977>od 1977</option><option value=1976>od 1976</option><option value=1975>od 1975</option>                            </select>
-
-                            <select name="yearMax" id="yearMax" class="custom-select">
-                                    <option value="999999">Letnik do</option>
-                                    <option value=2021>do 2021</option><option value=2020>do 2020</option><option value=2019>do 2019</option><option value=2018>do 2018</option><option value=2017>do 2017</option><option value=2016>do 2016</option><option value=2015>do 2015</option><option value=2014>do 2014</option><option value=2013>do 2013</option><option value=2012>do 2012</option><option value=2011>do 2011</option><option value=2010>do 2010</option><option value=2009>do 2009</option><option value=2008>do 2008</option><option value=2007>do 2007</option><option value=2006>do 2006</option><option value=2005>do 2005</option><option value=2004>do 2004</option><option value=2003>do 2003</option><option value=2002>do 2002</option><option value=2001>do 2001</option><option value=2000>do 2000</option><option value=1999>do 1999</option><option value=1998>do 1998</option><option value=1997>do 1997</option><option value=1996>do 1996</option><option value=1995>do 1995</option><option value=1994>do 1994</option><option value=1993>do 1993</option><option value=1992>do 1992</option><option value=1991>do 1991</option><option value=1990>do 1990</option><option value=1989>do 1989</option><option value=1988>do 1988</option><option value=1987>do 1987</option><option value=1986>do 1986</option><option value=1985>do 1985</option><option value=1984>do 1984</option><option value=1983>do 1983</option><option value=1982>do 1982</option><option value=1981>do 1981</option><option value=1980>do 1980</option><option value=1979>do 1979</option><option value=1978>do 1978</option><option value=1977>do 1977</option><option value=1976>do 1976</option><option value=1975>do 1975</option>                            </select>
+                            <%= f.select(:manufacture_year, [["od 2021", "2021"], ["od 2020", "2020"], ["od 2019", "2019"], ["od 2018", "2018"], ["od 2017", "2017"], ["od 2016", "2016"], ["od 2015", "2015"], ["od 2014", "2014"], ["od 2013", "2013"], ["od 2012", "2012"], ["od 2011", "2011"], ["od 2010", "2010"], ["od 2009", "2009"], ["od 2008", "2008"], ["od 2007", "2007"], ["od 2006", "2006"], ["od 2005", "2005"], ["od 2004", "2004"], ["od 2003", "2003"], ["od 2002", "2002"], ["od 2001", "2001"], ["od 2000", "2000"], ["od 1999", "1999"], ["od 1998", "1998"], ["od 1997", "1997"], ["od 1996", "1996"], ["od 1995", "1995"], ["od 1994", "1994"], ["od 1993", "1993"], ["od 1992", "1992"], ["od 1991", "1991"], ["od 1990", "1990"], ["od 1989", "1989"], ["od 1988", "1988"], ["od 1987", "1987"], ["od 1986", "1986"], ["od 1985", "1985"], ["od 1984", "1984"], ["od 1983", "1983"], ["od 1982", "1982"], ["od 1981", "1981"], ["od 1980", "1980"], ["od 1979", "1979"], ["od 1978", "1978"], ["od 1977", "1977"], ["od 1976", "1976"], ["od 1975", "1975"]], {prompt: "Letnik od"}, {class: 'custom-select' }) %>
+                            <%= f.select(:year_max, [["do 2021", "2021"], ["do 2020", "2020"], ["do 2019", "2019"], ["do 2018", "2018"], ["do 2017", "2017"], ["do 2016", "2016"], ["do 2015", "2015"], ["do 2014", "2014"], ["do 2013", "2013"], ["do 2012", "2012"], ["do 2011", "2011"], ["do 2010", "2010"], ["do 2009", "2009"], ["do 2008", "2008"], ["do 2007", "2007"], ["do 2006", "2006"], ["do 2005", "2005"], ["do 2004", "2004"], ["do 2003", "2003"], ["do 2002", "2002"], ["do 2001", "2001"], ["do 2000", "2000"], ["do 1999", "1999"], ["do 1998", "1998"], ["do 1997", "1997"], ["do 1996", "1996"], ["do 1995", "1995"], ["do 1994", "1994"], ["do 1993", "1993"], ["do 1992", "1992"], ["do 1991", "1991"], ["do 1990", "1990"], ["do 1989", "1989"], ["do 1988", "1988"], ["do 1987", "1987"], ["do 1986", "1986"], ["do 1985", "1985"], ["do 1984", "1984"], ["do 1983", "1983"], ["do 1982", "1982"], ["do 1981", "1981"], ["do 1980", "1980"], ["do 1979", "1979"], ["do 1978", "1978"], ["do 1977", "1977"], ["do 1976", "1976"], ["do 1975", "1975"]], {prompt: "Letnik do"}, {class: 'custom-select' }) %>
                         </div>
 
                         <div class="col-6 col-sm-4 p-0 pt-1 font-weight-normal">
                             <div class="form-check pretty p-icon p-rotate ml-sm-4">
-                                <input name="oldtimer" class="form-check-input" type="checkbox" value="1" id="oldtimer">
+                                <%= f.check_box(:oldtimer, class: "form-check-input") %>
                                 <div class="state p-danger-o">
                                     <i class="icon fa fa-check"></i>
                                     <label class="form-check-label" for="oldtimer">
@@ -169,42 +158,14 @@
 
                         <label for="kmMin" class="col-12 mt-3 p-0 m-0"><strong>Prevoženih km</strong></label>
                         <div class="col-12 col-sm-8 p-0 pr-3 input-group">
-                            <select name="kmMin" id="kmMin" class="custom-select">
-                                <option value="0">Prevoženi km od</option>
-                                <option value="5000">od 5000 km</option>
-                                <option value="10000">od 10000 km</option>
-                                <option value="20000">od 20000 km</option>
-                                <option value="25000">od 25000 km</option>
-                                <option value="50000">od 50000 km</option>
-                                <option value="75000">od 75000 km</option>
-                                <option value="100000">od 100000 km</option>
-                                <option value="125000">od 125000 km</option>
-                                <option value="150000">od 150000 km</option>
-                                <option value="200000">od 200000 km</option>
-                                <option value="250000">od 250000 km</option>
-                            </select>
+                            <%= f.select(:mileage, [["od 5.000km", "5000"], ["od 10.000km", "10000"], ["od 20.000km", "20000"], ["od 25.000km", "25000"], ["od 50.000km", "50000"], ["od 75.000km", "75000"], ["od 100.000km", "100000"], ["od 125.000km", "125000"], ["od 150.000km", "150000"], ["od 200.000km", "200000"], ["od 250.000km", "250000"]], {prompt: "Prevoženi km od"}, {class: 'custom-select' }) %>
 
-                            <select name="kmMax" id="kmMax" class="custom-select">
-
-                                    <option value="9999999">Prevoženi km do</option>
-                                    <option value="5000">do 5000 km</option>
-                                    <option value="10000">do 10000 km</option>
-                                    <option value="20000">do 20000 km</option>
-                                    <option value="25000">do 25000 km</option>
-                                    <option value="50000">do 50000 km</option>
-                                    <option value="75000">do 75000 km</option>
-                                    <option value="100000">do 100000 km</option>
-                                    <option value="125000">do 125000 km</option>
-                                    <option value="150000">do 150000 km</option>
-                                    <option value="200000">do 200000 km</option>
-                                    <option value="250000">do 250000 km</option>
-
-                            </select>
+                           <%= f.select(:mileage_max, [["do 5.000km", "5000"], ["do 10.000km", "10000"], ["do 20.000km", "20000"], ["do 25.000km", "25000"], ["do 50.000km", "50000"], ["do 75.000km", "75000"], ["do 100.000km", "100000"], ["do 125.000km", "125000"], ["do 150.000km", "150000"], ["do 200.000km", "200000"], ["do 250.000km", "250000"]], {prompt: "Prevoženi km do"}, {class: 'custom-select' }) %>
                         </div>
 
                         <div class="col-6 col-sm-4 p-0 pt-1 font-weight-normal">
                             <div class="form-check pretty p-icon p-rotate ml-sm-4">
-                                <input name="warranty" class="form-check-input" type="checkbox" value="1" id="warranty">
+                                <%= f.check_box(:has_warranty, class: "form-check-input") %>
                                 <div class="state p-danger-o">
                                     <i class="icon fa fa-check"></i>
                                     <label class="form-check-label" for="warranty">
@@ -222,98 +183,25 @@
 
                         <div class="col-12 col-sm-4 p-0 pr-3">
                             <label for="gearbox" class="m-0"><strong>Menjalnik</strong></label>
-                            <select name="gearbox" id="gearbox" class="custom-select">
-                                <option value="all">ni pomemben</option>
-                                <option value="2">Avtomatski</option><option value="1">Ročni</option>                            </select>
+                            <%= f.collection_select(:gearbox_id, Gearbox.all, :id, :name, {prompt: "ni pomemben"}, {class: "custom-select"}) %>
                         </div>
 
                         <div class="col-12 col-sm-4 p-0 pr-3">
                             <label for="fuelType" class="m-0"><strong>Gorivo</strong></label>
-                            <select name="fuelType" id="fuelType" class="custom-select">
-                                <option value="all">katerokoli</option>
-                                <option value="2">Bencin</option><option value="1">Dizel</option><option value="3">Električni</option><option value="4">Hibrid</option>                            </select>
+                            <%= f.collection_select(:fuel_type_id, FuelType.all, :id, :name, {prompt: "katerokoli"}, {class: "custom-select"}) %>
+                        </select>
                         </div>
 
                         <label for="ccmMin" class="col-12 p-0 m-0 mt-3"><strong>Prostornina motorja</strong></label>
                         <div class="col-12 col-sm-8 p-0 pr-3 input-group">
-                            <select name="ccmMin" id="ccmMin" class="custom-select">
-                                <option value="0">od min.</option>
-                                <option value="1000">1000 ccm</option>
-                                <option value="1350">1350 ccm</option>
-                                <option value="1600">1600 ccm</option>
-                                <option value="2000">2000 ccm</option>
-                                <option value="3000">3000 ccm</option>
-                                <option value="4000">4000 ccm</option>
-                            </select> 
-                            <select name="ccmMax" id="ccmMax" class="custom-select">
-                                <option value="999999">do max.</option>
-                                <option value="1000">1000 ccm</option>
-                                <option value="1350">1350 ccm</option>
-                                <option value="1600">1600 ccm</option>
-                                <option value="2000">2000 ccm</option>
-                                <option value="3000">3000 ccm</option>
-                                <option value="4000">4000 ccm</option>
-                            </select>
+                            <%= f.select(:ccm, [["1000 ccm", "1000"],["1350 ccm", "1350"], ["1600 ccm", "1600"], ["2000 ccm", "2000"], ["3000 ccm", "3000"], ["4000 ccm", "4000"]], {prompt: "od min."}, {class: 'custom-select' }) %>
+                            <%= f.select(:ccm_max, [["1000 ccm", "1000"],["1350 ccm", "1350"], ["1600 ccm", "1600"], ["2000 ccm", "2000"], ["3000 ccm", "3000"], ["4000 ccm", "4000"]], {prompt: "do max."}, {class: 'custom-select' }) %>
                         </div>
 
                         <label for="kwMin" class="col-12 p-0 m-0 mt-3"><strong>Moč motorja</strong></label>
                         <div class="col-12 col-sm-8 p-0 pr-3 input-group">
-                            <select name="kwMin" id="kwMin" class="custom-select">
-                                <option value="0">od min.</option>
-                                <option value="44">44 kW (60 KM)</option>
-                                <option value="55">55 kW (75 KM)</option>
-                                <option value="66">66 kW (90 KM)</option>
-                                <option value="74">74 kW (100 KM)</option>
-                                <option value="85">85 kW (116 KM)</option>
-                                <option value="96">96 kW (130 KM)</option>
-                                <option value="110">110 kW (150 KM)</option>
-                                <option value="147">147 kW (200 KM)</option>
-                                <option value="184">184 kW (250 KM)</option>
-                                <option value="220">220 kW (300 KM)</option>
-                                <option value="30">30 kW (40 KM)</option>
-                                <option value="40">40 kW (54 KM)</option>
-                                <option value="50">50 kW (67 KM)</option>
-                                <option value="60">60 kW (80 KM)</option>
-                                <option value="70">70 kW (94 KM)</option>
-                                <option value="80">80 kW (107 KM)</option>
-                                <option value="90">90 kW (121 KM)</option>
-                                <option value="100">100 kW (134 KM)</option>
-                                <option value="110">110 kW (147 KM)</option>
-                                <option value="120">120 kW (161 KM)</option>
-                                <option value="130">130 kW (174 KM)</option>
-                                <option value="150">150 kW (201 KM)</option>
-                                <option value="200">200 kW (268 KM)</option>
-                                <option value="250">250 kW (335 KM)</option>
-                                <option value="300">300 kW (402 KM)</option>
-                            </select>
-                            <select name="kwMax" id="kwMax" class="custom-select">
-                            <option value="999999">do max.</option>
-                            <option value="44">44 kW (60 KM)</option>
-                            <option value="55">55 kW (75 KM)</option>
-                            <option value="66">66 kW (90 KM)</option>
-                            <option value="74">74 kW (100 KM)</option>
-                            <option value="85">85 kW (116 KM)</option>
-                            <option value="96">96 kW (130 KM)</option>
-                            <option value="110">110 kW (150 KM)</option>
-                            <option value="147">147 kW (200 KM)</option>
-                            <option value="184">184 kW (250 KM)</option>
-                            <option value="222">222 kW (300 KM)</option>
-                            <option value="30">30 kW (40 KM)</option>
-                            <option value="40">40 kW (54 KM)</option>
-                            <option value="50">50 kW (67 KM)</option>
-                            <option value="60">60 kW (80 KM)</option>
-                            <option value="70">70 kW (94 KM)</option>
-                            <option value="80">80 kW (107 KM)</option>
-                            <option value="90">90 kW (121 KM)</option>
-                            <option value="100">100 kW (134 KM)</option>
-                            <option value="110">110 kW (147 KM)</option>
-                            <option value="120">120 kW (161 KM)</option>
-                            <option value="130">130 kW (174 KM)</option>
-                            <option value="150">150 kW (201 KM)</option>
-                            <option value="200">200 kW (268 KM)</option>
-                            <option value="250">250 kW (335 KM)</option>
-                            <option value="300">300 kW (402 KM)</option>
-                            </select>
+                            <%= f.select(:power, [["44 kW (60 KM)", "44"], ["55 kW (75 KM)", "55"], ["66 kW (90 KM)", "66"], ["74 kW (100 KM)", "74"], ["85 kW (116 KM)", "85"], ["96 kW (130 KM)", "96"], ["110 kW (150 KM)", "110"], ["147 kW (200 KM)", "147"], ["184 kW (250 KM)", "184"], ["220 kW (300 KM)", "220"]], {prompt: "od min."}, {class: 'custom-select' }) %>
+                            <%= f.select(:power_max, [["44 kW (60 KM)", "44"], ["55 kW (75 KM)", "55"], ["66 kW (90 KM)", "66"], ["74 kW (100 KM)", "74"], ["85 kW (116 KM)", "85"], ["96 kW (130 KM)", "96"], ["110 kW (150 KM)", "110"], ["147 kW (200 KM)", "147"], ["184 kW (250 KM)", "184"], ["220 kW (300 KM)", "220"]], {prompt: "do max."}, {class: 'custom-select' }) %>
                         </div>
                     </div>
 
@@ -325,7 +213,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="ac" class="form-check-input" type="checkbox" value="1" id="ac">
+                                    <%= f.check_box(:ac, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="ac">
@@ -337,7 +225,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="digital_ac" class="form-check-input" type="checkbox" value="1" id="digital_ac">
+                                    <%= f.check_box(:digital_ac, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="ac">
@@ -351,7 +239,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="keyless" class="form-check-input" type="checkbox" value="1" id="keyless">
+                                    <%= f.check_box(:keyless_go, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="keyless">
@@ -363,7 +251,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="headup" class="form-check-input" type="checkbox" value="1" id="headup">
+                                    <%= f.check_box(:headup, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="headup">
@@ -375,7 +263,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="navigation" class="form-check-input" type="checkbox" value="1" id="navigation">
+                                    <%= f.check_box(:navigation, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="navigation">
@@ -387,7 +275,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="cd_player" class="form-check-input" type="checkbox" value="1" id="cd_player">
+                                    <%= f.check_box(:cd_player, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="cd_player">
@@ -399,7 +287,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="mp3_player" class="form-check-input" type="checkbox" value="1" id="mp3_player">
+                                    <%= f.check_box(:mp3_player, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="mp3_player">
@@ -411,7 +299,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="dab" class="form-check-input" type="checkbox" value="1" id="dab">
+                                    <%= f.check_box(:dab, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="dab">
@@ -423,7 +311,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="electric_parking_brake" class="form-check-input" type="checkbox" value="1" id="electric_parking_brake">
+                                    <%= f.check_box(:electric_parking_brake, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="electric_parking_brake">
@@ -437,7 +325,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="abs" class="form-check-input" type="checkbox" value="1" id="abs">
+                                    <%= f.check_box(:abs, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="abs">
@@ -449,7 +337,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="fourwheel" class="form-check-input" type="checkbox" value="1" id="fourwheel">
+                                    <%= f.check_box(:fourwheel, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="fourwheel">
@@ -461,7 +349,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="alarm" class="form-check-input" type="checkbox" value="1" id="alarm">
+                                    <%= f.check_box(:alarm, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="alarm">
@@ -473,7 +361,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="xenon" class="form-check-input" type="checkbox" value="1" id="xenon">
+                                    <%= f.check_box(:xenon, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="xenon">
@@ -485,7 +373,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="led" class="form-check-input" type="checkbox" value="1" id="led">
+                                    <%= f.check_box(:led, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="led">
@@ -497,7 +385,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="automatic_lights" class="form-check-input" type="checkbox" value="1" id="automatic_lights">
+                                    <%= f.check_box(:automatic_lights, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="automatic_lights">
@@ -509,7 +397,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="emergency_brake" class="form-check-input" type="checkbox" value="1" id="emergency_brake">
+                                    <%= f.check_box(:emergency_brake, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="emergency_brake">
@@ -521,7 +409,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="cruise_control" class="form-check-input" type="checkbox" value="1" id="cruise_control">
+                                    <%= f.check_box(:cruise_control, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="cruise_control">
@@ -533,7 +421,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="hill_assist" class="form-check-input" type="checkbox" value="1" id="hill_assist">
+                                    <%= f.check_box(:hill_assist, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="hill_assist">
@@ -547,7 +435,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="pdc" class="form-check-input" type="checkbox" value="1" id="pdc">
+                                    <%= f.check_box(:pdc, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="pdc">
@@ -559,7 +447,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="rear_camera" class="form-check-input" type="checkbox" value="1" id="rear_camera">
+                                    <%= f.check_box(:rear_camera, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="rear_camera">
@@ -573,7 +461,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="service_book" class="form-check-input" type="checkbox" value="1" id="service_book">
+                                    <%= f.check_box(:service_book, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="service_book">
@@ -585,7 +473,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="slovenian" class="form-check-input" type="checkbox" value="1" id="slovenian">
+                                    <%= f.check_box(:slovenian, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="slovenian">
@@ -597,7 +485,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="garaged" class="form-check-input" type="checkbox" value="1" id="garaged">
+                                    <%= f.check_box(:garaged, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="garaged">
@@ -609,7 +497,7 @@
 
                         <div class="col-6 col-sm-4 p-0">
                             <div class="form-check pretty p-icon p-rotate m-2">
-                                    <input name="cash_discount" class="form-check-input" type="checkbox" value="1" id="cash_discount">
+                                    <%= f.check_box(:cash_discount, class: "form-check-input") %>
                                     <div class="state p-danger-o">
                                         <i class="icon fa fa-check"></i>
                                         <label class="form-check-label" for="cash_discount">

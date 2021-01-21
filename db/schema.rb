@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_153354) do
+ActiveRecord::Schema.define(version: 2021_01_21_173509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,10 @@ ActiveRecord::Schema.define(version: 2021_01_21_153354) do
     t.integer "price_max"
     t.integer "year_max"
     t.integer "mileage_max"
+    t.integer "manufacturer_id"
+    t.integer "ccm_max"
+    t.integer "power_max"
+    t.integer "avaliable"
   end
 
   create_table "towns", force: :cascade do |t|
