@@ -1,4 +1,6 @@
 class Car < ApplicationRecord
+    mount_uploader :image_url, ImageUploader
+
     belongs_to :user
     belongs_to :model
     belongs_to :car_type

@@ -9,12 +9,20 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'pg'
 #devise 
 gem 'devise'
+
+#imguploads
+gem 'carrierwave', "0.10.0"
+gem 'fog', '~> 1.37.0'
+gem "fog-aws"
+
 #AWS
 gem 'aws-sdk', '~> 2'
 #dotenv for enviromental variables
 gem 'dotenv-rails'
 # Bootstrap
 gem 'bootstrap'
+#env
+gem 'dotenv-rails', groups: [:development, :test]
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
