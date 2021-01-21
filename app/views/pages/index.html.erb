@@ -10,24 +10,49 @@
                     </h4>
                 </div>
             </div>
-            <%= form_with do |f| %>
+            <%= form_with url: "/pages/results" do |f| %>
                 <div class="form-row">
                     <div class="col-md-4">
                         <div class="col-12 px-0 py-2">
                             <div class="input-group">
-                                <%= f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Vse znamke"}, {class: "custom-select"}) %>
+                                <%= f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, {prompt: "Vse znamke"}, {class: "custom-select manufacturer_select"}) %>
                             </div>
                         </div>
                         <div class="col-12 px-0">
                             <div class="input-group">
 
-                                <select name="model" id="model" class="custom-select">
-                                    <option value="all">Vsi modeli</option>
-                                </select>
+                                <%= f.collection_select(:model_id, Model.all, :id, :name, {prompt: "Vsi modeli"}, {class: "custom-select model_select"}) %>
 
                             </div>
                         </div>
                     </div>
+
+
+                    <script>
+            
+                    $(document).on("change", ".manufacturer_select", function(){
+                    var manufacturer = $(this).val();
+                    $.ajax({
+                        url: "/pages",
+                        method: "GET",  
+                        dataType: "json",
+                        data: {manufacturer: manufacturer},
+                        error: function (xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                        },
+                        success: function (response) {
+                        $(".model_select").empty();
+                        console.log(response);
+                        var models = response["models"];
+                        $(".model_select").append('<option>Izberi model</option>');
+                        for(var i=0; i< models.length; i++){
+                            $(".model_select").append('<option value="' + models[i]["id"] + '">' + models[i]["name"] + '</option>');
+                        }
+                        }
+                    });
+                    });
+                    
+                    </script>
 
                     <div class="col-md-4">
 
