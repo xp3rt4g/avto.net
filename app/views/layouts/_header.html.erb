@@ -72,6 +72,9 @@
               <li class="float-right"><%= link_to destroy_user_session_path, method: :delete do %><span>Odjava</span><% end %></li>
               <li class="float-right"><%= link_to new_car_path do %><span>Objavi oglas</span><% end %></li>
               <li class="float-right"><%= link_to("/home") do %><span>moj.avto.met</span><% end %></li>
+              <% if current_user.admin? %>
+                <li class="float-right"><%= link_to("/admin") do %><span>Admin</span><% end %></li>
+              <%end%>
             <% end %>
             </ul>
         </div>
