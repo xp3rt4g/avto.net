@@ -288,8 +288,11 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
       rack-protection
-    omniauth-facebook (8.0.0)
-      omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (0.8.1)
+      jwt (>= 2.0)
+      oauth2 (~> 1.1)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.6)
     omniauth-oauth2 (1.7.1)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
@@ -432,7 +435,7 @@ DEPENDENCIES
   fog (~> 1.37.0)
   fog-aws
   jbuilder (~> 2.7)
-  omniauth-facebook
+  omniauth-google-oauth2
   pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
