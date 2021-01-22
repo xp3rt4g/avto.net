@@ -1,0 +1,86 @@
+<div class="container p-0">
+    <div class="row bg-white rounded-bottom shadow-box pt-3 pb-2 m-0 mb-3">
+        <div class="col-12">
+            <h4>Urejanje uporabnikov</h4>
+        </div>
+    </div>
+
+    <div class="container my-3 pb-2 bg-white shadow-box rounded">
+
+        <table class="table table-striped">
+
+            <thead>
+            <tr>
+            <th scope="col">
+                Ime
+            </th>
+            <th scope="col">
+                Email
+            </th>
+            <th scope="col">
+                Naslov
+            </th>
+            <th scope="col">
+                Mesto
+            </th>
+            <th scope="col">
+                Tel. št.
+            </th>
+            <th scope="col">
+                Vrsta računa
+            </th>
+            <th scope="col">
+                Izbriši
+            </th>
+            <th scope="col">
+                Uredi
+            </th>
+            </tr>
+            </thead>
+
+            <tbody>
+        
+            <% @users.each do |user| %>
+                    <tr>
+                    <td>
+                    <%= user.name %>
+                    </td>
+                    <td>
+                    <%= user.email %>
+                    </td>
+                    <td>
+                    <%= user.address %>
+                    </td>
+                    <td>
+                    <%= user.town.name %>
+                    </td>
+                    <td>
+                    <%= user.phone %>
+                    </td>
+                    <td>
+                    <% if current_user.admin? %>
+                    Admin
+                    <% else %>
+                    Navaden
+                    <% end %>
+                    </td>
+                    <td>
+                    <%= link_to admin_destroy_user_path(user), method: :delete, data: { confirm: "Ali res želite izbrisati uporabnika?" } do %>
+                    <i class="fa fa-times fa-2x text-danger"></i>
+                    <% end %>
+                    </td>
+                    <td>
+                    <%= link_to edit_user_path(user) do %>
+                    <i class="fa fa-pencil fa-2x text-muted"></i>
+                    <% end %>
+                    </td>
+                    </tr>
+
+            <% end %>
+        </tbody>
+        </table>
+
+
+    </div>
+
+</div>

@@ -1,5 +1,6 @@
 class AccountTypesController < ApplicationController
   before_action :set_account_type, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /account_types
   # GET /account_types.json

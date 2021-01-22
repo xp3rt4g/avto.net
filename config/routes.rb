@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root :to => 'searches#new'
   devise_for :users
+  resources :users
   resources :colors
   resources :pages
   resources :cars
@@ -20,5 +21,6 @@ Rails.application.routes.draw do
   get 'cars/update_models' , :as => 'update_models' 
   get '/search' => 'searches#advanced'
   get '/home' => 'cars#home'
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

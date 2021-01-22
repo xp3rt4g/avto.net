@@ -1,5 +1,6 @@
 class NumberOfOwnersController < ApplicationController
   before_action :set_number_of_owner, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /number_of_owners
   # GET /number_of_owners.json

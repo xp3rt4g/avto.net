@@ -1,5 +1,6 @@
 class TownsController < ApplicationController
   before_action :set_town, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /towns
   # GET /towns.json

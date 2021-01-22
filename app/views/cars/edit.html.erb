@@ -1,6 +1,14 @@
-<h1>Editing Car</h1>
-
+<% if (current_user.id == @car.user_id || current_user.admin?) %>
+<div class="container p-0">
+    <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+            <div class="row pt-3 pb-2 px-3">
+                <div class="col-12 px-0">
+                    <h3 class="blue"><strong>Urejanje oglasa</strong></h3>
+                </div>
+            </div>
+    </div>
 <%= render 'form', car: @car %>
 
-<%= link_to 'Show', @car %> |
-<%= link_to 'Back', cars_path %>
+<% else %>
+
+<% end %>

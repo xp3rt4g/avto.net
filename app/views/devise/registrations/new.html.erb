@@ -1,39 +1,88 @@
-<h2>Sign up</h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <div class="container p-0">
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+        <div class="row pt-3 pb-2 px-3">
+            <div class="col-12 px-0">
+                <h3 class="blue"><strong>Registracija novega uporabnika</strong></h3>
+            </div>
+        </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="card shadow-box">
+    
+    <form action="registerCompanySend.php" method="post">
+    
+        <div class="card-body">
+        
+            <h4>Naziv</h4>
+            <hr>
+            <div class="form-group row">
+                <label for="name" class="text-muted col-sm-2 col-form-label">Ime in priimek:</label>
+                <%= f.text_field :name, autofocus: true, class: "form-control col-sm-10" %>
+                <%= f.hidden_field :account_type_id, :value => "1" %>
+            </div>
+            <div class="form-group row">
+                <label for="country" class="text-muted col-sm-2 col-form-label">Država:</label>
+                <input type="text" value="Slovenija" class="form-control col-sm-10" readonly>
+            </div>
+            <div class="form-group row">
+                <label for="postCode" class="text-muted col-sm-2 col-form-label">Pošta oz. kraj:</label>
+                <%= f.collection_select(:town_id, Town.all.sort { |a,b| a.name <=> b.name }, :id, :name, {} , class: "form-control col-sm-10") %>
 
-  <div class="field">
-    <%= f.label :account_type_id %><br>
-    <%= f.collection_select(:account_type_id, AccountType.all, :id, :name) %>
-  </div>
+            </div>
+            <div class="form-group row">
+                <label for="street" class="text-muted col-sm-2 col-form-label">Naslov:</label>
+                <%= f.text_field :address, class: "form-control col-sm-10" %>
+            </div>
 
-  <div class="field">
-    <%= f.label :town_id %><br>
-    <%= f.collection_select(:town_id, Town.all, :id, :name) %>
-  </div>
+            <h4 class="mt-4">Kontaktni podatki</h4>
+            <hr>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+            <div class="form-group row">
+                <label for="contact" class="text-muted col-sm-2 col-form-label">Ime ob oglasu:</label>
+                <%= f.text_field :seller_title, class: "form-control col-sm-10" %>
+            </div>
+
+            <div class="form-group row">
+                <label for="phone" class="text-muted col-sm-2 col-form-label">Telefon:</label>
+                <%= f.text_field :phone, class: "form-control col-sm-10", maxlength: "12" %>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="text-muted col-sm-2 col-form-label">E-mail naslov:</label>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-sm-10", placeholder: "Podatek je obveen vendar ne bo objavljen!" %>
+            </div>
+
+            <h4 class="mt-4">Vpišite željeno geslo (minimalno 6 znakov)</h4>
+            <hr>
+
+            <div class="form-group row">
+                <label for="password" class="text-muted col-sm-2 col-form-label">Vaše geslo:</label>
+                <%= f.password_field :password, autocomplete: "new-password", class: "form-control col-sm-10" %>
+            </div>
+
+            <div class="form-group row">
+                <label for="password_confirmation" class="text-muted col-sm-2 col-form-label">Ponovite geslo:</label>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control col-sm-10" %>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-align-center">
+                    <span class="px-3 py-2">BREZPLAČNA registracija</span>
+            </button>
+
+        </div>
+    
+    </form>
+    
+    </div>
+
+<br>
+<br>
+</div>
 <% end %>
 
-<%= render "devise/shared/links" %>

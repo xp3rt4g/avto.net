@@ -1,5 +1,6 @@
 class VehicleStatusesController < ApplicationController
   before_action :set_vehicle_status, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /vehicle_statuses
   # GET /vehicle_statuses.json

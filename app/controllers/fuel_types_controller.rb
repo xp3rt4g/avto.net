@@ -1,5 +1,6 @@
 class FuelTypesController < ApplicationController
   before_action :set_fuel_type, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /fuel_types
   # GET /fuel_types.json
