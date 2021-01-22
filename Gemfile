@@ -8,7 +8,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 #using postgres
 gem 'pg'
 #devise 
-gem 'devise'
+gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf80a632d3232c3f548ce7b95fd94b6eb2'
+gem 'omniauth-facebook'
 
 #imguploads
 gem 'carrierwave', "0.10.0"
@@ -17,8 +18,6 @@ gem "fog-aws"
 
 #AWS
 gem 'aws-sdk', '~> 2'
-#dotenv for enviromental variables
-gem 'dotenv-rails'
 # Bootstrap
 gem 'bootstrap'
 #env
