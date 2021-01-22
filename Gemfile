@@ -8,8 +8,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 #using postgres
 gem 'pg'
 #devise 
-gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf80a632d3232c3f548ce7b95fd94b6eb2'
-gem 'omniauth-google-oauth2'
+gem 'devise'
+gem 'omniauth-github'
 
 #imguploads
 gem 'carrierwave', "0.10.0"
