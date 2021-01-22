@@ -1,297 +1,307 @@
-<p>
-  <strong>User:</strong>
-  <%= @car.user_id %>
-</p>
+<%= stylesheet_link_tag 'showad' %>
+<div class="container p-0">
+    <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+            <div class="row pt-3 pb-2 px-3">
+                <div class="col-12 px-0">
+                    <h3><%= @car.model.manufacturer.name %> <%= @car.model.name %> <%= @car.name %></h3>
+                </div>
+            </div>
+    </div>
 
-<p>
-  <strong>Model:</strong>
-  <%= @car.model_id %>
-</p>
+    <div class="container">
+        <div class="row p-0">
+            <div class="col-12 col-lg-8 pr-0 pr-lg-3 pl-0">
+                <div class="col-12 bg-white mb-3 p-1 shadow-box rounded">
+                    <div class="col-12 p-2">
+                        <div class="text-center">
+                            <%= image_tag @car.image_url.url, class: "img-fluid w-100 mw-100" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block d-lg-none col-12 p-0">
+                    <div class="card w-100 mb-3 text-center rounded shadow-box m-0">
+                        <div class="card-body p-0">
+                            <p class="h2 font-weight-bold align-middle py-4 mb-0"><%= number_with_delimiter(@car.price, :delimiter => '.') %> €</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 p-3 bg-white rounded shadow-box">
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th colspan="2" scope="col">Osnovni podatki</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="w-50 border border-white"></th>
+                                <td class="w-50 border border-white"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Starost:</th>
+                                <td><strong><%= @car.vehicle_status.name %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Prva registracija:</th>
+                                <td><strong><%= @car.first_registration.strftime('%m/%Y') %> <% if @car.slovenian? %><%= image_tag("SLOporeklo.gif", alt:"slovenski", align: "absmiddle", name:"Avto.net") %><% end %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Leto proizvodnje:</th>
+                                <td><strong><%= @car.manufacture_year %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Prevoženi kilometri:</th>
+                                <td><strong><%= @car.mileage %> km</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Tehnični pregled:</th>
+                                <td><strong><%= @car.inspection_expiry.strftime('%m/%Y') %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Motor:</th>
+                                <td><strong><%= @car.ccm %> ccm, <%= @car.power %> kW (<%= (@car.power*1.34102209).round %> KM)</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Gorivo:</th>
+                                <td><strong><%= @car.fuel_type.name %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Menjalnik:</th>
+                                <td><strong><%= @car.gearbox.name %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Število vrat:</th>
+                                <td><strong><%= @car.doors %> vr.</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Barva:</th>
+                                <td><strong><%= @car.color.name %><% if @car.metallic? %> - metallic<% end %></strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="font-weight-normal">Kraj ogleda:</th>
+                                <td><strong><%= @car.user.town.post_number %> - <%= @car.user.town.name %></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-<p>
-  <strong>Type:</strong>
-  <%= @car.name %>
-</p>
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th colspan="2" scope="col">Poraba goriva in emisije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th  scope="row" class="w-50 border border-white"></th>
+                                <td class="w-50 border border-white"></td>
+                            </tr>
+                            <tr>
+                                <th  scope="row" class="font-weight-normal">Kombinirana vožnja</th>
+                                <td><strong><%= @car.consumption %> l/100km</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th colspan="2" scope="col">Oprema in ostali podatki o ponudbi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th  scope="row" class="border border-white"></th>
+                                <td class="border border-white"></td>
+                            </tr>
+                            <tr>
+                                <th  scope="row" class="font-weight-bold">Podvozje:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul class="list font-weight-normal mb-0">
+                                        <% if @car.abs? %><li>ABS zavorni sistem</li><% end %>
+                                        <li>BAS pomoč pri zaviranju</li>                                        
+                                        <% if @car.fourwheel? %><li>štirikolesni pogon</li><% end %>                               
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                            <th  scope="row" class="font-weight-bold">Varnost:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul class="list font-weight-normal mb-0">
+                                        <li><%= @car.airbags %> x zračna vreča / airbag</li>
+                                        <li>tretja zavorna luč</li>
+                                        <li>kodno varovan vžig motorja</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                            <th  scope="row" class="font-weight-bold">Notranjost:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul class="list font-weight-normal mb-0">
+                                        <li>število sedežev: <%= @car.seats %></li>
+                                        <li>nastavljivi sedeži</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                            <th  scope="row" class="font-weight-bold">Udobje:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul class="list font-weight-normal mb-0">
+                                        <% if @car.ac? %><li>klimatska naprava</li><% end %>
+                                        <% if @car.digital_ac? %><li>klimatska naprava: digitalna</li><% end %>                                                                                                                                        
+                                        <% if @car.cruise_control? %><li>tempomat</li><% end %>                                        
+                                        <% if @car.electric_parking_brake? %><li>električna ročna zavora</li><% end %>                                       
+                                        <% if @car.rear_camera? %><li>vzvratna kamera</li><% end %>                                                                                                                     
+                                        <% if @car.pdc? %><li>parkirni senzorji</li><% end %>                                                                              
+                                        <% if @car.automatic_lights? %><li>avtomatske luči</li><% end %>                                                                                
+                                        <% if @car.led? %><li>led luči</li><% end %>                                   
+                                    </ul>
+                                </td>
+                            </tr>
+                            <% if @car.cd_player? and @car.mp3_player? and @car.navigation? %>
+                            <tr>
+                            <th  scope="row" class="font-weight-bold">Multimedija:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul class="list font-weight-normal mb-0">
+                                        <% if @car.cd_player? %><li>CD predvajalnik</li><% end %>                                        
+                                        <% if @car.mp3_player? %><li>MP3 predvajalnik</li><% end %>                                                                                                                       
+                                        <% if @car.navigation? %><li>navigacija</li><% end %>                                    
+                                    </ul>
+                                </td>
+                            </tr>
+                            <% end %>
+                            <tr>
+                            <th  scope="row" class="font-weight-bold">Stanje:</th>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <ul class="list font-weight-normal mb-0">
+                                        <% if @car.service_book? %><li>servisna knjiga</li><% end %>
+                                        <% if @car.slovenian? %><li>slovensko poreklo</li><% end %>                                      
+                                        <% if @car.garaged? %><li>garažirano</li><% end %>                                      
+                                        <% if @car.has_warranty? %><li>ima garancijo</li><% end %>                                   
+                                        <% if @car.has_guarranty? %><li>ima jamstvo</li><% end %>                                                                           
+                                        <li><%= @car.number_of_owner.name %></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-<p>
-  <strong>Car type:</strong>
-  <%= @car.image_url %>
-</p>
+                    <table class="table table-sm">
+                    <thead class="thead-light">
+                            <tr>
+                                <th colspan="2" scope="col">Opis:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-weight-normal border-top p-0 pt-3"><%= @car.comment %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-<p>
-  <strong>Vehicle status:</strong>
-  <%= @car.vehicle_status_id %>
-</p>
+            <div class="d-none d-lg-block col-lg-4">
+                <div class="row">
+                    <div class="card w-100 mb-3 text-center rounded shadow-box m-0">
+                        <div class="card-body p-0">
+                            <p class="h2 font-weight-bold align-middle py-4 mb-0"><%= number_with_delimiter(@car.price, :delimiter => '.') %> €</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 shadow-box rounded px-0">
+                        <div class="bg-blue rounded-top w-100 py-2 px-0 font-weight-bold text-white text-center">Prodajalec</div>
+                        <ul class="list-group list-group-flush bg-white p-0 pb-1 rounded-bottom text-center">
+                            <li class="list-group-item p-0 text-muted font-weight-bold h3 m-2 border-bottom-0">Tim</li>
+                            <li class="list-group-item text-muted h6 border-bottom-0">Telefon:</li>
+                            <li class="list-group-item pt-0"><a href="tel:<%= @car.user.phone %>" class="font-weight-bold"><p class="h4 font-weight-bold m-0 text-dark">031 809 053</p></a></li>
+                            <li class="list-group-item">
+                                <a href="mailto:<%= @car.user.email %>" class="btn btn-block py-0 text-white orange-bg">
+                                    <i class="fa fa-envelope px-3"></i>
+                                    <span class="font-weight-bold text-left">Pošlji e-mail prodajalcu</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-<p>
-  <strong>Has warranty:</strong>
-  <%= @car.has_warranty %>
-</p>
+        </div>
+    </div>
 
-<p>
-  <strong>Has guarranty:</strong>
-  <%= @car.has_guarranty %>
-</p>
+    <div class="container bg-white rounded shadow-box my-3 pb-2">
+        <div class="row px-1 pt-2">
+            <div class="col-12">
+                <h5 class="font-weight-bold">Cena:</h5>
+            </div>
 
-<p>
-  <strong>Oldtimer:</strong>
-  <%= @car.oldtimer %>
-</p>
+        </div>
+        <div class="row px-1">
+            <div class="col-12">
+                <div class="card h-100 text-center">
+                    <div class="card-body p-0">
+                        <p class="h1 font-weight-bold align-middle pt-4"><%= number_with_delimiter(@car.price, :delimiter => '.') %> €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row px-4 pt-2 pb-1">
+            <div class="col-12 alert bg-light mb-0 text-center"><% if @car.cash_discount? %>gotovinski popust -<% end %><% if @car.last_price? %>zadnja cena -<% end %><% if @car.avaliable? %> na zalogi<% end %></div>
+        </div>
+    </div>
 
-<p>
-  <strong>First registration:</strong>
-  <%= @car.first_registration %>
-</p>
 
-<p>
-  <strong>Manufacture year:</strong>
-  <%= @car.manufacture_year %>
-</p>
+    <div class="container bg-white rounded shadow-box my-3 p-0 pb-2">
+       <div class="row m-0 p-0 rounded">
+            <div class="col-12 bg-blue rounded-top p-2 pl-3 font-weight-bold text-white">Prodajalec</div>
+            <div class="col-12">
+                <ul class="list-group list-group-flush p-0 text-center">
+                    <li class="list-group-item border-bottom-0 h2"><%= @car.user.seller_title %></li>
+                    <li class="list-group-item p-0 h6 font-weight-bold text-muted border-bottom-0">Telefon:</li>
+                    <li class="list-group-item pt-0 border-bottom-0"><a href="tel:031 809 053" class="font-weight-bold"><p class="h3 font-weight-bold m-0 text-dark"><%= @car.user.phone %></p></a></li>
+                    <li class="list-group-item pt-2 d-block d-md-none">
+                        <a href="mailto:tom.povse@gmail.com" class="btn btn-block py-1 orange-bg text-white"><i class="fa fa-envelope px-3"></i><span class="pl-3 pr-3 font-weight-bold">E-mail prodajalcu</span></a>
+                    </li>
+                </ul>
+            </div>
+       </div>
+    </div>
+<% if current_user %>
+<% if (@car.user.id == current_user.id || current_user.admin?) %>
+    <div class="container p-0 pb-2">
+        <div class="row m-0 p-0 font-weight-normal">
+            <div class="col-12 p-0 pl-1 text-center text-lg-left">
+              <%= link_to edit_car_path(@car), class:"text-dark" do %>
+               <i class="fa fa-lg fa-pencil"></i> Uredi oglas<% end %>
+            </div>
+            <div class="col-12 p-0 pl-1 text-center text-lg-left">
+            <%= link_to @car, method: "delete", class:"text-danger" do %><i class="fa fa-lg fa-times"></i> Izbriši oglas<% end %>
+            </div>
+        </div>
+    </div>
+<% end %>
+<% end %>
+    
+    <div class="container p-0 pb-2">
+        <div class="row m-0 p-0 font-weight-normal">
+            <div class="col-12 p-0 pl-1 text-center text-lg-left">
+                <i class="fa fa-lg fa-calendar"></i> Objavljeno: <%= @car.created_at.strftime('%d.%m.%Y %H:%M:%S') %>            </div>
+        </div>
+    </div>
 
-<p>
-  <strong>Inspection expiry:</strong>
-  <%= @car.inspection_expiry %>
-</p>
 
-<p>
-  <strong>Mileage:</strong>
-  <%= @car.mileage %>
-</p>
 
-<p>
-  <strong>Number of owner:</strong>
-  <%= @car.number_of_owner_id %>
-</p>
-
-<p>
-  <strong>Vin:</strong>
-  <%= @car.vin %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @car.price %>
-</p>
-
-<p>
-  <strong>Cash discount:</strong>
-  <%= @car.cash_discount %>
-</p>
-
-<p>
-  <strong>Last price:</strong>
-  <%= @car.last_price %>
-</p>
-
-<p>
-  <strong>Driveable:</strong>
-  <%= @car.driveable %>
-</p>
-
-<p>
-  <strong>Damaged:</strong>
-  <%= @car.damaged %>
-</p>
-
-<p>
-  <strong>Crashed:</strong>
-  <%= @car.crashed %>
-</p>
-
-<p>
-  <strong>Service book:</strong>
-  <%= @car.service_book %>
-</p>
-
-<p>
-  <strong>Slovenian:</strong>
-  <%= @car.slovenian %>
-</p>
-
-<p>
-  <strong>Garaged:</strong>
-  <%= @car.garaged %>
-</p>
-
-<p>
-  <strong>Never crashed:</strong>
-  <%= @car.never_crashed %>
-</p>
-
-<p>
-  <strong>Fuel type:</strong>
-  <%= @car.fuel_type_id %>
-</p>
-
-<p>
-  <strong>Gearbox:</strong>
-  <%= @car.gearbox_id %>
-</p>
-
-<p>
-  <strong>Power:</strong>
-  <%= @car.power %>
-</p>
-
-<p>
-  <strong>Ccm:</strong>
-  <%= @car.ccm %>
-</p>
-
-<p>
-  <strong>Doors:</strong>
-  <%= @car.doors %>
-</p>
-
-<p>
-  <strong>Seats:</strong>
-  <%= @car.seats %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @car.color_id %>
-</p>
-
-<p>
-  <strong>Metallic:</strong>
-  <%= @car.metallic %>
-</p>
-
-<p>
-  <strong>Consumption:</strong>
-  <%= @car.consumption %>
-</p>
-
-<p>
-  <strong>Abs:</strong>
-  <%= @car.abs %>
-</p>
-
-<p>
-  <strong>Fourwheel:</strong>
-  <%= @car.fourwheel %>
-</p>
-
-<p>
-  <strong>Airbags:</strong>
-  <%= @car.airbags %>
-</p>
-
-<p>
-  <strong>Xenon:</strong>
-  <%= @car.xenon %>
-</p>
-
-<p>
-  <strong>Led:</strong>
-  <%= @car.led %>
-</p>
-
-<p>
-  <strong>Automatic lights:</strong>
-  <%= @car.automatic_lights %>
-</p>
-
-<p>
-  <strong>Alarm:</strong>
-  <%= @car.alarm %>
-</p>
-
-<p>
-  <strong>Headup:</strong>
-  <%= @car.headup %>
-</p>
-
-<p>
-  <strong>Emergency brake:</strong>
-  <%= @car.emergency_brake %>
-</p>
-
-<p>
-  <strong>Ac:</strong>
-  <%= @car.ac %>
-</p>
-
-<p>
-  <strong>Digital ac:</strong>
-  <%= @car.digital_ac %>
-</p>
-
-<p>
-  <strong>Keyless go:</strong>
-  <%= @car.keyless_go %>
-</p>
-
-<p>
-  <strong>Start stop:</strong>
-  <%= @car.start_stop %>
-</p>
-
-<p>
-  <strong>Cruise control:</strong>
-  <%= @car.cruise_control %>
-</p>
-
-<p>
-  <strong>Electric parking brake:</strong>
-  <%= @car.electric_parking_brake %>
-</p>
-
-<p>
-  <strong>Cd player:</strong>
-  <%= @car.cd_player %>
-</p>
-
-<p>
-  <strong>Mp3 player:</strong>
-  <%= @car.mp3_player %>
-</p>
-
-<p>
-  <strong>Usb:</strong>
-  <%= @car.usb %>
-</p>
-
-<p>
-  <strong>Dab:</strong>
-  <%= @car.dab %>
-</p>
-
-<p>
-  <strong>Navigation:</strong>
-  <%= @car.navigation %>
-</p>
-
-<p>
-  <strong>Rear camera:</strong>
-  <%= @car.rear_camera %>
-</p>
-
-<p>
-  <strong>Towing hook:</strong>
-  <%= @car.towing_hook %>
-</p>
-
-<p>
-  <strong>Hill assist:</strong>
-  <%= @car.hill_assist %>
-</p>
-
-<p>
-  <strong>Pdc:</strong>
-  <%= @car.pdc %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @car.comment %>
-</p>
-
-<p>
-  <strong>Avaliable:</strong>
-  <%= @car.avaliable %>
-</p>
-
-<%= link_to 'Edit', edit_car_path(@car) %> |
-<%= link_to 'Back', cars_path %>
+</div>

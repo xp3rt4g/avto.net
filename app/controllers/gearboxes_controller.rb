@@ -1,6 +1,7 @@
 class GearboxesController < ApplicationController
   before_action :set_gearbox, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_admin!
+  
   # GET /gearboxes
   # GET /gearboxes.json
   def index
