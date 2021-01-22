@@ -29,8 +29,8 @@ class CarTypesController < ApplicationController
 
     respond_to do |format|
       if @car_type.save
-        format.html { redirect_to @car_type, notice: 'Car type was successfully created.' }
-        format.json { render :show, status: :created, location: @car_type }
+        format.html { redirect_to car_types_path, notice: 'Car type was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @car_type.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class CarTypesController < ApplicationController
   def update
     respond_to do |format|
       if @car_type.update(car_type_params)
-        format.html { redirect_to @car_type, notice: 'Car type was successfully updated.' }
-        format.json { render :show, status: :ok, location: @car_type }
+        format.html { redirect_to car_types_path, notice: 'Car type was successfully updated.' }
+        format.json { render :show, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @car_type.errors, status: :unprocessable_entity }

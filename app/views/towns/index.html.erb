@@ -1,25 +1,65 @@
-<p id="notice"><%= notice %></p>
+<div class="container p-0">
+    <div class="row bg-white rounded-bottom shadow-box pt-3 pb-2 m-0 mb-3">
+        <div class="col-12">
+            <h4>Urejanje mest</h4>
+        </div>
+    </div>
 
-<h1>Towns</h1>
+    <div class="container my-3 pb-2 bg-white shadow-box rounded">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <table class="table table-striped">
 
-  <tbody>
-    <% @towns.each do |town| %>
-      <tr>
-        <td><%= link_to 'Show', town %></td>
-        <td><%= link_to 'Edit', edit_town_path(town) %></td>
-        <td><%= link_to 'Destroy', town, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <thead>
+            <tr>
+            <th scope="col">
+                Ime
+            </th>
+            <th scope="col">
+                Poštna številka
+            </th>
+            <th scope="col">
+                Uredi
+            </th>
+            <th scope="col">
+                Izbriši
+            </th>
+            </tr>
+            </thead>
 
-<br>
+            <tbody>
+        
+            <% @towns.order(:name).each do |town| %>
 
-<%= link_to 'New Town', new_town_path %>
+                    <tr>
+                    <td>
+                    <%= town.name %>
+                    </td>
+                    <td>
+                    <%= town.post_number %>
+                    </td>
+                    <td>
+                    <%= link_to edit_town_path(town) do %><i class="fa fa-pencil fa-2x text-muted"></i><% end %>
+                    </td>
+                    <td>
+                    <%= link_to town, method: :delete, data: { confirm: "Preden izbrišete mesto se prepričajte, da ga noben uporabnik ne uporablja!" } do %><i class="fa fa-times fa-2x text-danger"></i><% end %>
+                    </td>
+                    </tr>
+
+            <% end %>
+        </tbody>
+        </table>
+
+        <div class="col-12 col-md-4 m-auto">
+                        <div class="input-group h-100">
+                    
+                        <%= link_to new_town_path, class: "btn btn-block h-100 text-center orange-bg text-center py-0 text-white" do %>
+                            <i class="fa fa-plus px-2"></i>
+                            <span class="px-3 text-truncate">Dodaj mesto</span>
+                        <% end %>
+                        </div>
+                    
+                    </div>
+
+    </div>
+
+</div>

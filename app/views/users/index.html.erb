@@ -58,7 +58,7 @@
                     <%= user.phone %>
                     </td>
                     <td>
-                    <% if current_user.admin? %>
+                    <% if user.admin? %>
                     Admin
                     <% else %>
                     Navaden
@@ -70,7 +70,7 @@
                     <% end %>
                     </td>
                     <td>
-                    <%= link_to edit_user_path(user) do %>
+                    <%= link_to edit_registration_path(user) do %>
                     <i class="fa fa-pencil fa-2x text-muted"></i>
                     <% end %>
                     </td>

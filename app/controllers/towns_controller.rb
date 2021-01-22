@@ -29,8 +29,8 @@ class TownsController < ApplicationController
 
     respond_to do |format|
       if @town.save
-        format.html { redirect_to @town, notice: 'Town was successfully created.' }
-        format.json { render :show, status: :created, location: @town }
+        format.html { redirect_to towns_path, notice: 'Town was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @town.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class TownsController < ApplicationController
   def update
     respond_to do |format|
       if @town.update(town_params)
-        format.html { redirect_to @town, notice: 'Town was successfully updated.' }
-        format.json { render :show, status: :ok, location: @town }
+        format.html { redirect_to towns_path, notice: 'Town was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @town.errors, status: :unprocessable_entity }

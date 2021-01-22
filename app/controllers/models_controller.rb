@@ -29,8 +29,8 @@ class ModelsController < ApplicationController
 
     respond_to do |format|
       if @model.save
-        format.html { redirect_to @model, notice: 'Model was successfully created.' }
-        format.json { render :show, status: :created, location: @model }
+        format.html { redirect_to models_path, notice: 'Model was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @model.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class ModelsController < ApplicationController
   def update
     respond_to do |format|
       if @model.update(model_params)
-        format.html { redirect_to @model, notice: 'Model was successfully updated.' }
-        format.json { render :show, status: :ok, location: @model }
+        format.html { redirect_to models_path, notice: 'Model was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @model.errors, status: :unprocessable_entity }

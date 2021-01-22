@@ -1,25 +1,65 @@
-<p id="notice"><%= notice %></p>
+<div class="container p-0">
+    <div class="row bg-white rounded-bottom shadow-box pt-3 pb-2 m-0 mb-3">
+        <div class="col-12">
+            <h4>Urejanje modelov</h4>
+        </div>
+    </div>
 
-<h1>Models</h1>
+    <div class="container my-3 pb-2 bg-white shadow-box rounded">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <table class="table table-striped">
 
-  <tbody>
-    <% @models.each do |model| %>
-      <tr>
-        <td><%= link_to 'Show', model %></td>
-        <td><%= link_to 'Edit', edit_model_path(model) %></td>
-        <td><%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <thead>
+            <tr>
+            <th scope="col">
+                Ime znamke
+            </th>
+            <th scope="col">
+                Ime modela
+            </th>
+            <th scope="col">
+                Uredi
+            </th>
+            <th scope="col">
+                Izbriši
+            </th>
+            </tr>
+            </thead>
 
-<br>
+            <tbody>
+        
+            <% @models.order(:manufacturer_id, :name).each do |model| %>
 
-<%= link_to 'New Model', new_model_path %>
+                    <tr>
+                    <td>
+                    <%= model.manufacturer.name %>
+                    </td>
+                    <td>
+                    <%= model.name %>
+                    </td>
+                    <td>
+                    <%= link_to edit_model_path(model) do %><i class="fa fa-pencil fa-2x text-muted"></i><% end %>
+                    </td>
+                    <td>
+                    <%= link_to model, method: :delete, data: { confirm: "Preden izbrišete model se prepričajte, da nima nobenega oglasa!" } do %><i class="fa fa-times fa-2x text-danger"></i><% end %>
+                    </td>
+                    </tr>
+
+            <% end %>
+        </tbody>
+        </table>
+
+        <div class="col-12 col-md-4 m-auto">
+                        <div class="input-group h-100">
+
+                        <%= link_to new_model_path, class: "btn btn-block h-100 text-center orange-bg text-center py-0 text-white" do %>
+                            <i class="fa fa-plus px-2"></i>
+                            <span class="px-3 text-truncate">Dodaj model</span>
+                        <% end %>
+                        </div>
+                    
+                    </div>
+
+    </div>
+
+</div>

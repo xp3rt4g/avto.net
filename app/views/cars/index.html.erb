@@ -9,39 +9,39 @@
         <div class="row pt-3">
 
             <div class="col-sm-4 col-12">
-                <%= link_to "/users", class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3" do %>
+                <%= link_to "/users", class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-white" do %>
                     <span class="px-3 py-2 text-center">Urejanje uporabnikov</span>
                 <% end %>
             </div>
 
             <div class="col-sm-4 col-12">
-                <a href="editCities.php" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3">
+                <%= link_to towns_path, class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-white" do %>
                     <span class="px-3 py-2 text-center">Urejanje mest</span>
-                </a>
+                <% end %>
             </div>
 
             <div class="col-sm-4 col-12">
-                <a href="editManufacturers.php" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3">
+                <%= link_to manufacturers_path, class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-white" do %>
                     <span class="px-3 py-2 text-center">Urejanje znamk</span>
-                </a>
+                <% end %>
             </div>
 
             <div class="col-sm-4 col-12">
-                <a href="editModels.php" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3">
+                <%= link_to models_path, class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-white" do %>
                     <span class="px-3 py-2 text-center">Urejanje modelov</span>
-                </a>
+                <% end %>
             </div>
 
             <div class="col-sm-4 col-12">
-                <a href="editColors.php" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3">
+                <%= link_to colors_path, class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-white" do %>
                     <span class="px-3 py-2 text-center">Urejanje barv</span>
-                </a>
+                <% end %>
             </div>
 
             <div class="col-sm-4 col-12">
-                <a href="editAds.php" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3">
-                    <span class="px-3 py-2 text-center">Urejanje oglasov</span>
-                </a>
+                <%= link_to car_types_path, class: "btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-white" do %>
+                    <span class="px-3 py-2 text-center">Urejanje tipov</span>
+                <% end %>
             </div>
         </div>
     </div>

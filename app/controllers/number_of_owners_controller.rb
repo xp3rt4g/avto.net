@@ -29,8 +29,8 @@ class NumberOfOwnersController < ApplicationController
 
     respond_to do |format|
       if @number_of_owner.save
-        format.html { redirect_to @number_of_owner, notice: 'Number of owner was successfully created.' }
-        format.json { render :show, status: :created, location: @number_of_owner }
+        format.html { redirect_to number_of_owners_path, notice: 'Number of owner was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @number_of_owner.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class NumberOfOwnersController < ApplicationController
   def update
     respond_to do |format|
       if @number_of_owner.update(number_of_owner_params)
-        format.html { redirect_to @number_of_owner, notice: 'Number of owner was successfully updated.' }
-        format.json { render :show, status: :ok, location: @number_of_owner }
+        format.html { redirect_to number_of_owners_path, notice: 'Number of owner was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @number_of_owner.errors, status: :unprocessable_entity }

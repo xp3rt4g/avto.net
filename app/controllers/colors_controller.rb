@@ -29,8 +29,8 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       if @color.save
-        format.html { redirect_to @color, notice: 'Color was successfully created.' }
-        format.json { render :show, status: :created, location: @color }
+        format.html { redirect_to colors_path, notice: 'Color was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @color.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class ColorsController < ApplicationController
   def update
     respond_to do |format|
       if @color.update(color_params)
-        format.html { redirect_to @color, notice: 'Color was successfully updated.' }
-        format.json { render :show, status: :ok, location: @color }
+        format.html { redirect_to colors_path, notice: 'Color was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @color.errors, status: :unprocessable_entity }

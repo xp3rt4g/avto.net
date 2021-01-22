@@ -29,8 +29,8 @@ class ManufacturersController < ApplicationController
 
     respond_to do |format|
       if @manufacturer.save
-        format.html { redirect_to @manufacturer, notice: 'Manufacturer was successfully created.' }
-        format.json { render :show, status: :created, location: @manufacturer }
+        format.html { redirect_to manufacturers_path, notice: 'Manufacturer was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class ManufacturersController < ApplicationController
   def update
     respond_to do |format|
       if @manufacturer.update(manufacturer_params)
-        format.html { redirect_to @manufacturer, notice: 'Manufacturer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @manufacturer }
+        format.html { redirect_to manufacturers_path, notice: 'Manufacturer was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
