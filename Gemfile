@@ -9,8 +9,12 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'pg'
 #devise 
 gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf80a632d3232c3f548ce7b95fd94b6eb2'
-gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-oauth2'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
+gem "omniauth-rails_csrf_protection"
 #imguploads
 gem 'carrierwave', "0.10.0"
 gem 'fog', '~> 1.37.0'

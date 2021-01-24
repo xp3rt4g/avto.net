@@ -5,27 +5,30 @@ class User < ApplicationRecord
   belongs_to :account_type
   belongs_to :town
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[github]
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   def self.from_omniauth(auth)
-     user = User.find_by(email: auth.info.email)
-     if user
-       user.provider = auth.provider
-       user.uid = auth.uid
-       user.save
-     else
-       user = User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-         user.email = auth.info.email
-         user.password = Devise.friendly_token[0,20]
-         user.first_name = auth.info.name.split(' ').first
-         user.last_name = auth.info.name.split(' ').second
-       end
-     end
-     unless user.avatar.present?
-       photo_url = auth.info.image
-       user.remote_avatar_url = photo_url # Carrierwave helper
-       user.save
-     end
-     user
-   end
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name   # assuming the user model has a name
+      #user.image = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails, 
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+      if data = session["devise.google_oauth2"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
+  
 end

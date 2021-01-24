@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root :to => 'searches#new'
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
   resources :users
   resources :colors
   resources :pages
