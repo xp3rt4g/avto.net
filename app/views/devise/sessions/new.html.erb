@@ -78,9 +78,14 @@
                 <% end %>
 
                 <div class="row">
-                    <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
-                    <%= link_to "Sign in with FB", user_facebook_omniauth_authorize_path, method: :post %>
-             
+                    <%= link_to(user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-social btn-google border mr-1") do %>
+                        <i class="fa fa-google fa-fw"></i> Sign in with Google
+                    <% end %>
+                    
+
+                    <%= link_to(user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-social btn-facebook border ml-1") do %>
+                        <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook
+                    <% end %>
                 </div> 
                 
                 <br>
