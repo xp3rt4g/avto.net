@@ -1,0 +1,81 @@
+<%= form_with(model: user, local: true) do |f| %>
+<% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container p-0">
+
+    <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+        <div class="row pt-3 pb-2 px-3">
+            <div class="col-12 px-0">
+                <h3 class="blue"><strong>Urejanje uporabnika</strong></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-box">
+
+    
+        <div class="card-body">
+        
+            <h4>Naziv</h4>
+            <hr>
+            <div class="form-group row">
+                <label for="name" class="text-muted col-sm-2 col-form-label">Ime in priimek:</label>
+                <%= f.text_field :name, autofocus: true, class: "form-control col-sm-10" %>
+            </div>
+            <div class="form-group row">
+                <label for="country" class="text-muted col-sm-2 col-form-label">Država:</label>
+                <input type="text" value="Slovenija" class="form-control col-sm-10" readonly>
+            </div>
+            <div class="form-group row">
+                <label for="postCode" class="text-muted col-sm-2 col-form-label">Pošta oz. kraj:</label>
+                <%= f.collection_select(:town_id, Town.all.sort { |a,b| a.name <=> b.name }, :id, :name, {} , class: "form-control col-sm-10") %>
+
+            </div>
+            <div class="form-group row">
+                <label for="street" class="text-muted col-sm-2 col-form-label">Naslov:</label>
+                <%= f.text_field :address, class: "form-control col-sm-10" %>
+            </div>
+
+            <h4 class="mt-4">Kontaktni podatki</h4>
+            <hr>
+
+            <div class="form-group row">
+                <label for="contact" class="text-muted col-sm-2 col-form-label">Ime ob oglasu:</label>
+                <%= f.text_field :seller_title, class: "form-control col-sm-10" %>
+            </div>
+
+            <div class="form-group row">
+                <label for="phone" class="text-muted col-sm-2 col-form-label">Telefon:</label>
+                <%= f.text_field :phone, class: "form-control col-sm-10", maxlength: "12" %>
+            </div>
+            
+            <% if @user.email == "test@test.si" %>
+            <div class="form-group row">
+                <label for="email" class="text-muted col-sm-2 col-form-label">E-mail naslov:</label>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-sm-10", placeholder: "Podatek je obveen vendar ne bo objavljen!" %>
+            </div>
+            <% end %>
+
+
+            <button type="submit" class="btn btn-lg btn-block orange-bg text-center py-0 mb-3 text-align-center">
+                    <span class="px-3 py-2">SHRANI</span>
+            </button>
+
+        </div>
+
+    
+    </div>
+
+<br>
+<br>
+</div>
+<% end %>

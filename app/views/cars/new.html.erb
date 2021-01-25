@@ -1,16 +1,19 @@
 <% if user_signed_in? %>
-<div class="container p-0">
+    <% if current_user.address? && current_user.seller_title? && current_user.phone? && current_user.email? %>
+        <div class="container p-0">
 
-    <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
-            <div class="row pt-3 pb-2 px-3">
-                <div class="col-12 px-0">
-                    <h3 class="blue"><strong>Dodajanje novega oglasa</strong></h3>
-                </div>
+            <div class="container bg-white rounded-bottom shadow-box m-0 mb-3">
+                    <div class="row pt-3 pb-2 px-3">
+                        <div class="col-12 px-0">
+                            <h3 class="blue"><strong>Dodajanje novega oglasa</strong></h3>
+                        </div>
+                    </div>
             </div>
-    </div>
 
-<%= render 'form', car: @car %>
-
+        <%= render 'form', car: @car %>
+    <% else %>
+        <%= controller.redirect_to root_path, notice: "Preden lahko objavite oglase morate dopolniti vaše podatke!" %>
+    <% end %>
 <% else %>
 
 <% end %>

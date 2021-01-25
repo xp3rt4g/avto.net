@@ -70,6 +70,7 @@
             <li><%= link_to("/search") do %><span>Išči avte</span><% end %></li>
             <% if user_signed_in? %>
               <li class="float-right"><%= link_to destroy_user_session_path, method: :delete do %><span>Odjava</span><% end %></li>
+              <li class="float-right"><%= link_to edit_user_path(current_user.id) do %><span>Uredi podatke</span><% end %></li>
               <li class="float-right"><%= link_to new_car_path do %><span>Objavi oglas</span><% end %></li>
               <li class="float-right"><%= link_to("/home") do %><span>moj.avto.met</span><% end %></li>
               <% if current_user.admin? %>
