@@ -77,7 +77,7 @@ Rails.application.configure do
     :address => 'mail.povs.se',
     :port => 465,
     :authentication => 'plain',
-    :tls => true
+    :tls => true,
     :enable_starttls_auto => true
   }
 
