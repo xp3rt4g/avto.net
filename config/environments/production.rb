@@ -73,7 +73,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :user_name => ENV['USERNAME'],
     :password => ENV['PASSWORD'],
-    :domain => 'mail.povs.se',
+    :domain => 'avto-net.herokuapp.com',
     :address => 'mail.povs.se',
     :port => 465,
     :authentication => 'plain',
