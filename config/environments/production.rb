@@ -66,16 +66,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'avto-net.herokuapp.com', protocol: 'https'}
 
   config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :user_name => ENV['USERNAME'],
     :password => ENV['PASSWORD'],
-    :domain => 'avto-net.herokuapp.com',
+    :domain => 'mail.povs.se',
     :address => 'mail.povs.se',
     :port => 465,
     :authentication => 'plain',
+    :tls => true
     :enable_starttls_auto => true
   }
 

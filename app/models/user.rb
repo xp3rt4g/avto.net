@@ -18,6 +18,7 @@ class User < ApplicationRecord
       user.name = auth.info.name   # assuming the user model has a name
       user.account_type_id = 1
       user.town_id = 1
+      user.skip_confirmation!
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
