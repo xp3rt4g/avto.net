@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @cars = Car.where(user_id: @user.id).destroy
+    @cars = Car.where(user_id: @user.id)
     @cars.each do |car|
       car.destroy
     end
