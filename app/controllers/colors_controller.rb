@@ -55,6 +55,10 @@ class ColorsController < ApplicationController
   # DELETE /colors/1
   # DELETE /colors/1.json
   def destroy
+    @cars = Car.where(color_id: @color.id)
+    @cars.each do |car|
+      car.destroy
+    end
     @color.destroy
     respond_to do |format|
       format.html { redirect_to colors_url, notice: 'Color was successfully destroyed.' }

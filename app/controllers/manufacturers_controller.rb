@@ -55,6 +55,14 @@ class ManufacturersController < ApplicationController
   # DELETE /manufacturers/1
   # DELETE /manufacturers/1.json
   def destroy
+    @models = Model.where(manufacturer_id: @manufacturer.id)
+    @models.each do |model|
+      @cars = Car.where(model_id: model.id)
+      @cars.each do |car|
+        car.destroy
+      end
+      model.destroy
+    end
     @manufacturer.destroy
     respond_to do |format|
       format.html { redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.' }

@@ -14,10 +14,11 @@ class User < ApplicationRecord
       else
         user.email = "test@test.si"
       end
+      @town = Town.first
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name   # assuming the user model has a name
       user.account_type_id = 1
-      user.town_id = 1
+      user.town_id = @town.id
       user.skip_confirmation!
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.

@@ -55,6 +55,10 @@ class ModelsController < ApplicationController
   # DELETE /models/1
   # DELETE /models/1.json
   def destroy
+    @cars = Car.where(model_id: @model.id)
+    @cars.each do |car|
+      car.destroy
+    end
     @model.destroy
     respond_to do |format|
       format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }

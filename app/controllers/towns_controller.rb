@@ -55,6 +55,14 @@ class TownsController < ApplicationController
   # DELETE /towns/1
   # DELETE /towns/1.json
   def destroy
+    @users = User.where(town_id: @town.id)
+    @users.each do |user|
+      @cars = Car.where(user_id: user.id)
+      @cars.each do |car|
+        car.destroy
+      end
+      user.destroy
+    end
     @town.destroy
     respond_to do |format|
       format.html { redirect_to towns_url, notice: 'Town was successfully destroyed.' }
