@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :cars
   belongs_to :account_type
   belongs_to :town
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable, 
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   def self.from_omniauth(auth)
